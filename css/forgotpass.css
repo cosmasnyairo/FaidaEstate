@@ -1,0 +1,129 @@
+body{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 664px;
+	background-color: grey;
+	font-family: sans-serif;
+}
+.forgotpassbox{
+	width: 320px;
+	height: 370px;
+	background: #ddd;
+	color: black;
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%,-50%);
+	box-sizing: border-box;
+	padding: 70px 30px;
+	border-radius: 50px;
+}
+.avatar{
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	position: absolute;
+	top: -12%;
+	right: 33%;
+}
+h1{
+	margin: 0;
+	padding: 0 0 20px;
+	text-align: center;	
+	font-size: 22px;
+}
+.forgotpassbox p{
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+}
+.forgotpassbox input{
+	width: 100%;
+	margin-bottom: 20px;
+}
+.forgotpassbox input[type="text"], input[type="password"]
+{
+	border: none;
+	border-bottom: 1px solid #fff;
+	background: transparent;
+	outline: none;
+	height: 40px;
+	color: red;
+	font-size: 16px;
+}
+.forgotpassbox input[type="submit"]
+{
+	border: none;
+	outline: none;
+	height: 30px;
+	background: #848280;
+	color: #fff;
+	font-size: 16px;
+	border-radius: 20px;
+}
+.forgotpassbox input[type="submit"]:hover
+{
+	cursor: pointer;
+	background: #5b2f04;
+	color: #000;
+}
+.forgotpassbox a{
+	text-decoration: none;
+	font-size: 12px;
+	line-height: 20px;
+	color: darkgrey;
+}
+.forgotpassbox a:hover{
+	color: #5b2f04;	
+}
+
+<?php
+		
+		$host = 'localhost';
+        $user = 'root';
+        $pass = '';
+        $database = 'estate';
+        $conn = mysqli_connect($host,$user,$pass,$database);
+
+
+        if (!$conn) {
+   			 die("Connection failed: " . mysqli_connect_error());
+		}
+
+		$users_last_name = $_COOKIE["users_last_name"];
+
+		$sql = "SELECT * FROM public_messages ORDER BY 	Msg_ID ASC";
+		$result = mysqli_query($conn, $sql);
+		
+		while ($row=$result->fetch_array()) : 
+			$username = $row["Sender"];
+			$profile_query = "SELECT * FROM resident WHERE Fname = '$username'AND Lname = '$users_last_name'";
+			$exec_command = mysqli_query($conn,$profile_query);
+			$get_profile = mysqli_fetch_assoc($exec_command);
+
+			if($row["Sender"]==$_COOKIE["user_first_name"])
+			{	
+				if($get_profile["Profile_Picture"]==""){
+    				echo "<div class='chat self'><!-- Self  -->
+					<div class='user-photo'><img src='../Profile_Pictures/avatar.png'></div>
+					<p class='chat-message'>".$row["Message"]."<br>~".$row["Sender"]."</p>
+					</div>";
+				}
+				else{$username_picture = $get_profile["Profile_Picture"];
+					echo "<div class='chat self'><!-- Self  -->
+					<div class='user-photo'><img src='../Profile_Pictures/$username_picture'></div>
+					<p class='chat-message'>".$row["Message"]."<br>~".$row["Sender"]."</p>
+					</div>";
+				}
+    		}
+    		else
+    		{
+				echo "<div class='chat other'><!-- Other  -->
+					<div class='user-photo'><img src='../Profile_Pictures/default.png'></div>
+					<p class='chat-message'>".$row["Message"]."<br>~".$row["Sender"]."</p>
+					</div>";
+    		}	
+			// echo "Msg is :".$row['Message']."</br>";
+	endwhile;
+	?>

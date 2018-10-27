@@ -1,0 +1,90 @@
+.announcement_page{
+  width: 76%;
+  height: 8 5vh;
+  margin-left: -25px;
+  float: left;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+div[class="announcement_page"]::-webkit-scrollbar{
+    width: 10px;
+}
+
+div[class="announcement_page"]::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background : rgba(0,0,0,.1);
+}
+
+.right-page{
+  float: right;
+  background-color: white;
+  width: 22%;
+  height: 99vh;
+  position: fixed;
+  margin-top: -10px;
+  margin-left: 60.9%;
+}
+
+.panel-decorated{
+  box-shadow: 2px 2px 2px !important;
+  position:sticky;
+
+}
+.panel-heading,.panel .panel-title{
+
+    font-size: 1.2em !important;
+    color:#34398 !important;
+    font-weight: bold;
+    text-align: center;
+    background-color: white !important;
+    border-color:#4ea5fc !important;
+    font-family: sans-serif;
+}
+
+.panel-body{
+  background-color: rgba(25, 13, 7, 0.14);
+  font-size: 1.0em !important;
+  width: 252px;
+  height: 180px;
+  overflow-y: auto; 
+ 
+}
+
+.row-adjusted{
+  margin-left: 5px;
+  margin-top: 15px;
+}
+
+#txt_announcement{
+  margin-left: 10%;
+  resize: none;
+  height: 320px;
+  width: 250px;
+  box-shadow: -1px 1px 6px 0px;
+}
+
+#btn_holder{
+  float:right;
+  margin-right: 20px;
+  border-radius: 10px;
+  background-color: whitesmoke;
+}
+
+.msg_title{
+  margin-left: 20px;
+  color: black;
+}
+
+.form-control-adjusted{
+  margin-left: 20px;
+  height: 35px;
+  width: 250px;
+}
+
+#btn_post{
+  width: 60px;
+  height: 40px;
+}
