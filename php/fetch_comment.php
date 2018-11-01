@@ -2,7 +2,7 @@
 
 //fetch_comment.php
 
-$connect = new PDO('mysql:host=localhost;dbname=estate', 'root', '');
+$connect = new PDO('mysql:host=localhost;dbname=faida_estate', 'root', '');
 
 $query = "
 SELECT * FROM tbl_comment 

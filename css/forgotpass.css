@@ -83,7 +83,7 @@ h1{
 		$host = 'localhost';
         $user = 'root';
         $pass = '';
-        $database = 'estate';
+        $database = 'faida_estate';
         $conn = mysqli_connect($host,$user,$pass,$database);
 
 

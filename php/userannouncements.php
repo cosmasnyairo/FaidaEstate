@@ -3,7 +3,7 @@
   $host = "localhost";
   $user = "root";
   $pass = "";
-  $database = "estate";
+  $database = "faida_estate";
   session_start();
 
   if(!isset($_SESSION['user_id']))
@@ -15,7 +15,8 @@
 
  <html>
   <head>
-    <title>Announcements</title>
+
+     <title>e-Nyumba | Announceements </title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,13 +56,14 @@
         <nav>
           <ul>
             <li>
-              <a href="profile.php">
+              <a href="dashboard.php">
                 <span><i class="fa fa-user"></i></span>
                 <span>Profile</span>
               </a>
             </li>
+
             <li>
-              <a href="index.php">
+              <a href="chat.php">
 
                 <span><i class="fa fa-envelope"></i></span>
                 <span>Chat</span>
@@ -69,13 +71,28 @@
             </li>
             
             <li class="active">
-              <a href="announcements.php">
+              <a href="userannouncements.php">
 
                 <span><i class="fa fa-envelope"></i></span>
                 <span>Announcements</span>
               </a>
             </li>
-           
+      
+  
+          <li>
+            <a href="finances.php">
+              <span><i class="fas fa-folder"></i></span>
+              <span>Statements</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="my_payments.php">
+              <span><i class="fas fa-coins"></i></span>
+              <span>My Payments</span>
+            </a>
+          </li>
+
             <li>
               <a href="logout.php">
                 <span><i class="glyphicon glyphicon-log-out"></i></span>
@@ -91,7 +108,7 @@
 
         <div class="announcement_page">
           <div class="row row-adjusted">
-            <?php 
+               <?php 
               include('get_announcements.php');
             ?>
           </div>

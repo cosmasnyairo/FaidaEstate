@@ -4,7 +4,7 @@ $id = $_SESSION['login_id'];
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "estate";
+$dbname = "faida_estate";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -13,7 +13,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "SELECT * FROM resident";
+$sql = "SELECT * FROM users WHERE position = 'Resident'";
 $result = $conn->query($sql);
 
 $query = "SELECT * FROM new_residents";
@@ -24,7 +24,7 @@ $result1 = $conn->query($query);
 <!DOCTYPE html>
 <html>
 <head>
-  <title>e-Nyumba App | Resident Payments</title>
+   <title>e-Nyumba | Manage Residents </title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -98,21 +98,21 @@ $result1 = $conn->query($query);
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="chairchat.php">
                             <span><i class="fa fa-comment-alt"></i></span>
                             <span>Chat</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="chairannouncements.php">
                             <span><i class="fa fa-envelope"></i></span>
-                            <span>Manage Chat Forums</span>
+                            <span>Announcements</span>
                         </a>
                     </li>
                     <li>
                         <a href="chairperson_track_payments.php">
                             <span><i class="fas fa-coins"></i></span>
-                            <span>Manage Estate Finances</span>
+                            <span>Estate Finances</span>
                         </a>
                     </li>
                      <li class="active">
@@ -131,93 +131,188 @@ $result1 = $conn->query($query);
                 </ul>
             </nav>
         </div>
-        
-    <div class="main-content">
+      <div class="main-content">
       <div class="title">
         Faida Estate Residents
       </div>
-                <button class="accordion">All Residents</button>
-            <div class="panel">
-
-            <div id="resident_table">  
-                          <table class="table table-bordered">  
-                               <tr>  
-                                    <th>Resident Name</th>
-                                    <th>House Number</th>
-                                    <th>Email</th>  
-                                    <th>Phone Number</th> 
-                                    <th>Contact</th> 
-                               </tr>  
-                               <?php  
-                               while($row = mysqli_fetch_array($result))  
-                               {  
-                               ?>  
-                               <tr>  
-                                    <td><?php echo $row["name"]; ?></td>  
-                                    <td><?php echo $row["houseNumber"]; ?></td>
-                                    <td><?php echo $row["email"]; ?></td>
-                                    <td><?php echo $row["phoneNo"]; ?></td>
-
+    
+          
+        <div class="col-md-12">
+            <div class="residents_content"></div>
+        </div>
+           
      
-                                    <td><input type="button" name="contact" value="Contact" id="<?php echo $row["user_id"]; ?>" class="btn btn-info btn-xs view_data" /></td>  
-                               </tr>  
-                               <?php  
-                               }  
-                               ?>  
-                          </table>  
-                     </div> 
-             </div>
-     <button class="accordion">Pending Residents</button>
-            <div class="panel">
-           <div id="resident_table">  
-                          <table class="table table-bordered">  
-                               <tr>  
-                                    <th>Resident Name</th>
-                                    <th>House Number</th>
-                                    <th>Email</th>  
-                                    <th>Phone Number</th> 
-                                    <th>Verify</th> 
-                                    <th>Contact</th>
-                               </tr>  
-                               <?php  
-                               while($row1 = mysqli_fetch_array($result1))  
-                               {  
-                               ?>  
-                               <tr>  
-                                    <td><?php echo $row1["name"]; ?></td>  
-                                    <td><?php echo $row1["houseNumber"]; ?></td>
-                                    <td><?php echo $row1["email"]; ?></td>
-                                    <td><?php echo $row1["phoneNo"]; ?></td>
-
-                                     <td><input type="button" name="verify" value="Verify" id="<?php echo $row["user_id"]; ?>" class="btn btn-success btn-xs view_data" /></td>   
-                                    <td><input type="button" name="contact" value="Contact" id="<?php echo $row["user_id"]; ?>" class="btn btn-info btn-xs view_data" /></td> 
-
-                               </tr>  
-                               <?php  
-                               }  
-                               ?>  
-                          </table>  
-                     </div> 
-                 </div>
-
+          
+        <div class="col-md-12">
+            <div class="new_residents_content"></div>
+        </div>
+    
      
 
       </div>
     
-<script>
-var acc = document.getElementsByClassName("accordion");
-var i;
+   <!-- Modal - Resident Details -->
+<div class="modal fade" id="user_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">Contact Resident</h4>
+            </div>
+            <div class="modal-body">
+                <p class="statusMsg"></p>
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="username" placeholder="Full Name" class="form-control"/>
+                </div>
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight){
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    } 
-  });
+                <div class="form-group">
+                    <label for="houseNumber">House Number</label>
+                    <input type="text" id="houseNumber" placeholder="House Number" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="text" id="email" placeholder="Email Address" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Subject</label>
+                    <input type="text" id="subject" placeholder="Subject" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Your Message" class="form-control"> </textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id= submitBtn onclick="submitContactForm()">Email</button>
+                <input type="hidden" id="hidden_user_id">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- // Modal -->
+
+ <!-- Modal - Contact Pending Residents Details -->
+<div class="modal fade" id="contact_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">Contact Pending Resident </h4>
+            </div>
+            <div class="modal-body">
+                <p class="statusMsg"></p>
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="full-name" placeholder="Full Name" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="houseNumber">House Number</label>
+                    <input type="text" id="house-number" placeholder="House Number" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="text" id="E-mail" placeholder="Email Address" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Subject</label>
+                    <input type="text" id="Subject" placeholder="Subject" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="Message" placeholder="Your Message" class="form-control"> </textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id= submitBtn onclick="submitPendingContactForm()">Email</button>
+                <input type="hidden" id="hidden_pending_id">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- // Modal -->
+<script type="text/javascript" src= "../javascript/resident_script.js"> </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"> 
+</script>
+<script type="text/javascript">
+   
+function submitContactForm(){
+   
+    var subject = $('#subject').val();
+    var email = $('#e-mail').val();
+    var message = $('#message').val();
+    if(subject.trim() == '' ){
+        alert('Please enter the subject.');
+        $('#subject').focus();
+        return false;
+    }else if(message.trim() == '' ){
+        alert('Please enter your message.');
+        $('#message').focus();
+        return false;
+    }
+    else{
+         $.post("../mail/sendEmail.php", {
+            subject:subject,
+            email: email,
+            message: message
+        },
+        function (data, status) {
+            if(status == 'ok'){
+                    $('#subject').val('');
+                    $('#message').val('');
+                    $('.statusMsg').html('<span style="color:green;">Your Message has been Sent.</p>');
+                }else{
+                    $('.statusMsg').html('<span style="color:red;">Some problem occurred, please try again.</span>');
+                }
+        }
+    );
+}
+ }
+
+function submitPendingContactForm(){
+   
+    var subject = $('#Subject').val();
+    var email = $('#E-mail').val();
+    var message = $('#Message').val();
+    if(subject.trim() == '' ){
+        alert('Please enter the subject.');
+        $('#subject').focus();
+        return false;
+    }else if(message.trim() == '' ){
+        alert('Please enter your message.');
+        $('#message').focus();
+        return false;
+  }else{
+         $.post("../mail/sendEmail.php", {
+            subject:subject,
+            email: email,
+            message: message
+        },
+        function (data, status) {
+            if(status == 'ok'){
+                    $('#subject').val('');
+                    $('#message').val('');
+                    $('.statusMsg').html('<span style="color:green;">Your Message has been Sent.</p>');
+                }else{
+                    $('.statusMsg').html('<span style="color:red;">Some problem occurred, please try again.</span>');
+                }
+        }
+    );
+}
 }
 var logout = document.getElementById('logout');
 logout.addEventListener('click', function() {

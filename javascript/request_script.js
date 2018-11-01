@@ -1,18 +1,9 @@
 
-
-// READ records
-function readRecords() {
-    $.get("../ajax/readRequestRecords.php", {}, function (data, status) {
-        $(".records_content").html(data);
-    });
-}
-
-
-function deleteRequest(requestID) {
-    var conf = confirm("Are you sure you want to delete this request?");
+function DeleteUser(pendingID) {
+    var conf = confirm("Are you sure you want to delete this user?");
     if (conf == true) {
-        $.post("../ajax/deleteRequest.php", {
-                requestID: requestID
+        $.post("../ajax/deleteUser.php", {
+               pendingID: pendingID
             },
             function (data, status) {
                 // reload Users by using readRecords();
@@ -22,22 +13,28 @@ function deleteRequest(requestID) {
     }
 }
 
-function GetUserDetails(requestID) {
-    // Add User ID to the hidden field for furture usage
-    $("#hidden_residentID").val(requestID);
-    $.post("../ajax/readRequestDetails.php", {
-            requestID: requestID
-        },
-        function (data, status) {
-            // PARSE json data
-            var request = JSON.parse(data);
-            // Assing existing values to the modal popup fields
-            $("#update_name").val(request.name);
-            $("#update_email").val(request.email);
-        }
-    );
-    // Open modal popup
-    $("#update_user_modal").modal("show");
+function UpdateStatus(pendingID) {
+    // get values
+    var conf = confirm("Are you sure you want to verify this resident?");
+    if (conf == true) {
+        $.post("../ajax/updateUserDetails.php", {
+               pendingID: pendingID
+            },
+            function (data, status) {
+                // reload Users by using readRecords();
+                readRecords();
+            }
+        );
+    }
+}
+
+function readRecords() {
+    $.get("../ajax/readResidentRecords.php", {}, function (data, status) {
+        $(".residents_content").html(data);
+    });
+    $.get("../ajax/readNewResidentRecords.php", {}, function (data, status) {
+        $(".new_residents_content").html(data);
+    });
 }
 
 $(document).ready(function () {

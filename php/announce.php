@@ -3,7 +3,7 @@ error_reporting(0);
 $host = "localhost";
 $user = "root";
 $pass = "";
-$database = "estate";
+$database = "faida_estate";
 session_start();
 
 if(!isset($_SESSION['user_id']))
@@ -13,7 +13,7 @@ if(!isset($_SESSION['user_id']))
   $host = "localhost";
   $user = "root";
   $pass = "";
-  $database = "estate";
+  $database = "faida_estate";
   echo $_SESSION['username'];
 
   $connection_String = mysqli_connect($host,$user,$pass,$database);

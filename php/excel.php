@@ -1,5 +1,5 @@
 <?php 
-	$connect=mysqli_connect("localhost","root","","estate");
+	$connect=mysqli_connect("localhost","root","","chat");
 	$output='';
 	$from='$_POST["from"]';
 	$to='$_POST["to"]';
@@ -32,7 +32,7 @@
 			}
 			$output .='</table>';
 			header("Content-Type: application/xls");
-			header("Content-Disposition:attachment; filename=minutes.xls");	
+			header("Content-Disposition:attachment; filename=download.xls");	
 			echo $output;
 		}
 	}

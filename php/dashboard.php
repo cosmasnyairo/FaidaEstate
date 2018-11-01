@@ -1,10 +1,15 @@
 <?php
 session_start();
-$id = $_SESSION['login_id'];
+$id = $_SESSION['user_id'];
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "estate";
+$dbname = "faida_estate";
+
+if(!isset($_SESSION['user_id']))
+{
+ header("location:login.php");
+}
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -12,7 +17,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
-$sql = "SELECT * FROM resident WHERE user_id ='$id'";
+$sql = "SELECT * FROM users WHERE user_id ='$id'";
 $result = $conn->query($sql);
 
     
@@ -63,7 +68,7 @@ $result = $conn->query($sql);
 <!DOCTYPE html>
 <html>
 <head>
-	<title>e-Nyumba App | Resident Home Dashboard</title>
+	 <title>e-Nyumba | Dashboard </title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -94,7 +99,7 @@ $result = $conn->query($sql);
         </div>
 
         <a href="#" class="nav-trigger"><span></span></a>
-         <p align="center" style="margin-top: 15px; margin-right: 60px; text-align: right; color: black; font-weight: bold; ">Welcome, <?php echo $_SESSION['username']; ?></p>
+         <p align="center" style="margin-top: 15px; margin-right: 60px; text-align: right; color: white; font-weight: bold; ">Welcome, <?php echo $_SESSION['username']; ?></p>
 
     </div>
 		<div class="side-nav">
@@ -111,17 +116,33 @@ $result = $conn->query($sql);
 						</a>
 					</li>
 					<li>
-						<a href="../php/index.php">
+						<a href="chat.php">
 							<span><i class="fa fa-envelope"></i></span>
 							<span>Chat</span>
 						</a>
 					</li>
-					<li>
-						<a href="finances.php">
-							<span><i class="fa fa-bank"></i></span>
-							<span>Finances</span>
-						</a>
-					</li>
+                    <li>
+                        <a href="userannouncements.php">
+
+                        <span><i class="fa fa-envelope"></i></span>
+                        <span>Announcements</span>
+                      </a>
+                    </li>
+            
+  
+                  <li>
+                        <a href="finances.php">
+                            <span><i class="fas fa-folder"></i></span>
+                            <span>Statements</span>
+                        </a>
+                    </li>
+
+                      <li>
+                        <a href="my_payments.php">
+                          <span><i class="fas fa-coins"></i></span>
+                          <span>My Payments</span>
+                        </a>
+                      </li>
                     <li>
 						<a id="logout">
 							<span><i class="fa fa-sign-out"></i></span>
@@ -145,17 +166,19 @@ $result = $conn->query($sql);
     <div class="row">
         <?php echo $data; ?> 
             <div class="records_content"></div>
-    </div>
+   </div>
+    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalForm" style="float: left;">
+                     Contact System Administrator
+                     </button>
                 </div>
-				</div>
+                </div>
           
-				
-					
-			</div>
+                
+                    
             </div>
             </div>
-			
- <!-- Modal -->
+        </div>
+        <!-- Modal -->
 <div class="modal fade" id="modalForm" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -165,52 +188,82 @@ $result = $conn->query($sql);
                     <span aria-hidden="true">&times;</span>
                     <span class="sr-only">Close</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Edit Account</h4>
+                <h4 class="modal-title" id="myModalLabel">Contact Form</h4>
             </div>
-				
-                <div class="modal-body">
-
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="update_name" placeholder="First Name" class="form-control"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="houseNumber">House Number</label>
-                    <input type="text" id="update_houseNumber" placeholder="House Number" class="form-control"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="text" id="update_email" placeholder="Email Address" class="form-control"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="phoneNo">Phone Number</label>
-                    <input type="text" id="update_phoneNo" placeholder="254XXXXXXXXX" class="form-control"/>
-                </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <p class="statusMsg"></p>
+                <form role="form">
+                    <div class="form-group">
+                        <label for="inputName">Name</label>
+                        <input type="text" class="form-control" id="inputName" placeholder="Enter your name"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail">Email</label>
+                        <input type="email" class="form-control" id="inputEmail" placeholder="Enter your email"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputMessage">Message</label>
+                        <textarea class="form-control" id="inputMessage" placeholder="Enter your message"></textarea>
+                    </div>
+                </form>
             </div>
+            
+            <!-- Modal Footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" onclick="UpdateUserDetails()" >Save Changes</button>
-                <input type="hidden" id="hidden_user_id">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary submitBtn" onclick="submitContactForm()">SUBMIT</button>
             </div>
         </div>
     </div>
 </div>
-
-
-            
-
-<script>
-
-function readRecords() {
-    $.get("../php/dashboard.php", {}, function (data, status) {
-        $(".records_content").html(data);
-    });
+<script> 
+    function submitContactForm(){
+    var reg = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+    var name = $('#inputName').val();
+    var email = $('#inputEmail').val();
+    var message = $('#inputMessage').val();
+    if(name.trim() == '' ){
+        alert('Please enter your name.');
+        $('#inputName').focus();
+        return false;
+    }else if(email.trim() == '' ){
+        alert('Please enter your email.');
+        $('#inputEmail').focus();
+        return false;
+    }else if(email.trim() != '' && !reg.test(email)){
+        alert('Please enter valid email.');
+        $('#inputEmail').focus();
+        return false;
+    }else if(message.trim() == '' ){
+        alert('Please enter your message.');
+        $('#inputMessage').focus();
+        return false;
+    }else{
+        $.ajax({
+            type:'POST',
+            url:'../php/submit_form.php',
+            data:'contactFrmSubmit=1&name='+name+'&email='+email+'&message='+message,
+            beforeSend: function () {
+                $('.submitBtn').attr("disabled","disabled");
+                $('.modal-body').css('opacity', '.5');
+            },
+            success:function(msg){
+                if(msg == 'ok'){
+                    $('#inputName').val('');
+                    $('#inputEmail').val('');
+                    $('#inputMessage').val('');
+                    $('.statusMsg').html('<span style="color:green;">Thanks for contacting us, we\'ll get back to you soon.</p>');
+                }else{
+                    $('.statusMsg').html('<span style="color:red;">Some problem occurred, please try again.</span>');
+                }
+                $('.submitBtn').removeAttr("disabled");
+                $('.modal-body').css('opacity', '');
+            }
+        });
+    }
 }
-
-
 var logout = document.getElementById('logout');
 logout.addEventListener('click', function() {
   if (confirm("Are you sure you want to log out?")) {

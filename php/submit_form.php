@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "estate";
+$dbname = "faida_estate";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

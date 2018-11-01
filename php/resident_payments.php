@@ -4,7 +4,7 @@ $id = $_SESSION['login_id'];
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "estate";
+$dbname = "faida_estate";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -13,17 +13,18 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "SELECT * FROM ((payments INNER JOIN resident ON payments.user_id = resident.user_id)
+$sql = "SELECT * FROM ((payments INNER JOIN users ON payments.user_id = users.user_id)
 INNER JOIN statement ON payments.statementID = statement.statementID)";
 
 $result = $conn->query($sql);
+$number = 1;
 
 $conn->close();
 ?>  
 <!DOCTYPE html>
 <html>
 <head>
-	<title>e-Nyumba App | Resident Payments</title>
+	 <title>e-Nyumba | Resident Payments </title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,15 +63,21 @@ $conn->close();
       <nav>
         <ul>
           <li>
-            <a href="../php/treasurerdashboard.php">
+            <a href="treasurerdashboard.php">
               <span><i class="fas fa-address-card"></i></span>
               <span>Profile</span>
             </a>
           </li>
           <li>
-            <a href="../html/chat.html">
+            <a href="chat.php">
               <span><i class="fa fa-envelope"></i></span>
               <span>Chat</span>
+            </a>
+          </li>
+          <li>
+            <a href="treasurerannouncements.php">
+              <span><i class="fa fa-envelope"></i></span>
+              <span>Announcements</span>
             </a>
           </li>
           <li>
@@ -100,19 +107,21 @@ $conn->close();
 				All Resident Payments
 			</div>
 			<div class="main">
+          <?php  
+        while($row = mysqli_fetch_array($result))  
+                               {  
+                               ?>  
 				 <div id="resident_table">  
                           <table class="table table-bordered">  
-                               <tr>  
+                               <tr> <th>No. </th>
                                     <th>Resident Name</th>
                                     <th>Month</th>
                                     <th>Status</th>  
                                     <th>View</th>  
                                </tr>  
-                               <?php  
-                               while($row = mysqli_fetch_array($result))  
-                               {  
-                               ?>  
-                               <tr>  
+                             
+                               <tr> 
+                                    <td><?php echo $number ; ?></td> 
                                     <td><?php echo $row["username"]; ?></td>  
                                     <td><?php echo $row["month"]; ?></td>
                                     <td><?php echo $row["status"]; ?></td>
@@ -120,7 +129,8 @@ $conn->close();
                                     <td><input type="button" name="view" value="View" id="<?php echo $row["paymentID"]; ?>" class="btn btn-info btn-xs view_data" /></td>  
                                </tr>  
                                <?php  
-                               }  
+                             
+                                $number++; }
                                ?>  
                           </table>  
                      </div>  
@@ -151,13 +161,13 @@ $conn->close();
 <script>
 $(document).ready(function(){ 
 	$(document).on('click', '.view_data', function(){  
-           var resident_id = $(this).attr("id");  
-           if(resident_id != '')  
+           var user_id = $(this).attr("id");  
+           if(user_id != '')  
            {  
                 $.ajax({  
                      url:"select_payment.php",  
                      method:"POST",  
-                     data:{resident_id:resident_id},  
+                     data:{user_id:user_id},  
                      success:function(data){  
                           $('#resident_detail').html(data);  
                           $('#dataModal').modal('show');  

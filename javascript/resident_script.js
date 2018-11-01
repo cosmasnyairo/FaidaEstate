@@ -1,49 +1,9 @@
-// Add Record
-function addRecord() {
-    // get values
-    var name = $("#name").val();
-    var houseNumber = $("#houseNumber").val();
-    var email = $("#email").val();
-    var password = $("#password").val();
-    var phoneNo = $("#phoneNo").val();
 
-    // Add record
-    $.post("../ajax/addResident.php", {
-        name: name,
-        houseNumber: houseNumber,
-        email: email,
-        phoneNo: phoneNo,
-        password: password
-
-    }, function (data, status) {
-        // close the popup
-        $("#add_new_record_modal").modal("hide");
-
-        // read records again
-        readRecords();
-
-        // clear fields from the popup
-        $("#name").val("");
-        $("#houseNumber").val("");
-        $("#email").val("");
-        $("#phoneNo").val("");
-        $("#password").val("");
-    });
-}
-
-// READ records
-function readRecords() {
-    $.get("../ajax/readResidentRecords.php", {}, function (data, status) {
-        $(".records_content").html(data);
-    });
-}
-
-
-function DeleteUser(residentID) {
+function DeleteUser(pendingID) {
     var conf = confirm("Are you sure you want to delete this user?");
     if (conf == true) {
-        $.post("../ajax/deleteResident.php", {
-                residentID: residentID
+        $.post("../ajax/deleteUser.php", {
+               pendingID: pendingID
             },
             function (data, status) {
                 // reload Users by using readRecords();
@@ -53,51 +13,28 @@ function DeleteUser(residentID) {
     }
 }
 
-function GetUserDetails(residentID) {
-    // Add User ID to the hidden field for furture usage
-    $("#hidden_residentID").val(residentID);
-    $.post("../ajax/readResidentDetails.php", {
-            residentID: residentID
-        },
-        function (data, status) {
-            // PARSE json data
-            var resident = JSON.parse(data);
-            // Assing existing values to the modal popup fields
-            $("#update_name").val(resident.name);
-            $("#update_houseNumber").val(resident.houseNumber);
-            $("#update_email").val(resident.email);
-            $("#update_phoneNo").val(resident.phoneNo)
-        }
-    );
-    // Open modal popup
-    $("#update_user_modal").modal("show");
+function UpdateStatus(pendingID) {
+    // get values
+    var conf = confirm("Are you sure you want to verify this resident?");
+    if (conf == true) {
+        $.post("../ajax/updateUserDetails.php", {
+               pendingID: pendingID
+            },
+            function (data, status) {
+                // reload Users by using readRecords();
+                readRecords();
+            }
+        );
+    }
 }
 
-function UpdateUserDetails() {
-    // get values
-    var name = $("#update_name").val();
-    var houseNumber = $("#update_houseNumber").val();
-    var email = $("#update_email").val();
-    var phoneNo =  $("#update_phoneNo").val();
-
-    // get hidden field value
-    var residentID = $("#hidden_residentID").val();
-
-    // Update the details by requesting to the server using ajax
-    $.post("../ajax/updateResidentDetails.php", {
-            residentID:residentID,
-            name: name,
-            houseNumber: houseNumber,
-            email: email,
-            phoneNo: phoneNo
-        },
-        function (data, status) {
-            // hide modal popup
-            $("#update_user_modal").modal("hide");
-            // reload Users by using readRecords();
-            readRecords();
-        }
-    );
+function readRecords() {
+    $.get("../ajax/readResidentRecords.php", {}, function (data, status) {
+        $(".residents_content").html(data);
+    });
+    $.get("../ajax/readNewResidentRecords.php", {}, function (data, status) {
+        $(".new_residents_content").html(data);
+    });
 }
 
 $(document).ready(function () {

@@ -4,8 +4,8 @@ $id = $_SESSION['login_id'];
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "estate";
-$sql = "SELECT * FROM resident WHERE user_id ='$id'";
+$dbname = "faida_estate";
+$sql = "SELECT * FROM users WHERE user_id ='$id'";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -50,7 +50,7 @@ $result6 = $conn->query($sql6);
 <!DOCTYPE html>
 <html>
 <head>
-	<title>e-Nyumba App | Resident Payment Module</title>
+	 <title>e-Nyumba | Payment </title>
 	<meta charset="utf-8">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -100,7 +100,7 @@ $result6 = $conn->query($sql6);
         </div>
 
         <a href="#" class="nav-trigger"><span></span></a>
-         <p align="center" style="margin-top: 15px; margin-right: 60px; text-align: right; color: black; font-weight: bold; ">Welcome, <?php echo $_SESSION['username']; ?></p>
+         <p align="center" style="margin-top: 15px; margin-right: 60px; text-align: right; color: white; font-weight: bold; "><?php echo $_SESSION['username']; ?></p>
 
     </div>
 		<div class="side-nav">
@@ -111,11 +111,26 @@ $result6 = $conn->query($sql6);
 			<nav>
 				<ul>
 					<li>
-						<a href="../php/dashboard.php">
+						<a href="dashboard.php">
 							<span><i class="fa fa-user"></i></span>
 							<span>Profile</span>
 						</a>
 					</li>
+          <li>
+              <a href="chat.php">
+
+                <span><i class="fa fa-envelope"></i></span>
+                <span>Chat</span>
+              </a>
+            </li>
+            
+            <li>
+              <a href="userannouncements.php">
+
+                <span><i class="fa fa-envelope"></i></span>
+                <span>Announcements</span>
+              </a>
+            </li>
 			
   
 				  <li class="active">
@@ -126,7 +141,7 @@ $result6 = $conn->query($sql6);
 					</li>
 
           <li>
-            <a href="../php/my_payments.php">
+            <a href="my_payments.php">
               <span><i class="fas fa-coins"></i></span>
               <span>My Payments</span>
             </a>

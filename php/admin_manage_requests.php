@@ -4,7 +4,7 @@ session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "estate";
+$dbname = "faida_estate";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>e-Nyumba App | System Administrator Home Dashboard</title>
+	 <title>e-Nyumba | Manage Requests </title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -53,21 +53,16 @@ if ($conn->connect_error) {
 						</a>
 					</li>
 					<li>
-						<a href="admin_manage_residents.php">
+						<a href="admin_manage_users.php">
 							<span><i class="fa fa-users"></i></span>
-							<span>Manage Residents</span>
+							<span>Manage Users</span>
 						</a>
 					</li>
-					<li>
-						<a href="admin_manage_administrators.php">
-							<span><i class="fa fa-user"></i></span>
-							<span>Manage Estate Administrators</span>
-						</a>
-					</li>
+					
                     <li class="active">
                         <a href="#">
                             <span><i class="fab fa-wpforms"></i></span>
-                            <span>Manage System Requests</span>
+                            <span>Manage Requests</span>
                         </a>
                     </li>
                     <li>
@@ -95,17 +90,16 @@ if ($conn->connect_error) {
 
 
 <!-- Bootstrap Modals -->
-
 <!-- Modal - Update User details -->
 <div class="modal fade" id="update_user_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">Update</h4>
+                <h4 class="modal-title" id="myModalLabel">Contact User</h4>
             </div>
             <div class="modal-body">
-
+                 <p class="statusMsg"></p>
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" id="update_name" placeholder="First Name" class="form-control"/>
@@ -116,21 +110,23 @@ if ($conn->connect_error) {
                     <input type="text" id="update_email" placeholder="Email Address" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <label for="email">Message</label>
-                    <input type="text" id="message" placeholder="Message" class="form-control" value="/*Contact User Abour Modified Change via e-mail*/" />
+                    <label for="email">Subject</label>
+                    <input type="text" id="subject" placeholder="Subject" class="form-control"/>
                 </div>
 
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Your Message" class="form-control"> </textarea>
+                </div>
+            </div>
             <div class="modal-footer">
-                
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Message</button>
-                <input type="hidden" id="hidden_residentID">
+                <button type="button" class="btn btn-primary" id= submitBtn onclick="submitContactForm()">Email</button>
+                <input type="hidden" id="hidden_user_id">
             </div>
         </div>
     </div>
 </div>
-</div>
-<!-- // Modal -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -142,6 +138,38 @@ if ($conn->connect_error) {
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"> 
 </script>
 <script type="text/javascript">
+function submitContactForm(){
+   
+    var subject = $('#subject').val();
+    var email = $('#e-mail').val();
+    var message = $('#message').val();
+    if(subject.trim() == '' ){
+        alert('Please enter the subject.');
+        $('#subject').focus();
+        return false;
+    }else if(message.trim() == '' ){
+        alert('Please enter your message.');
+        $('#message').focus();
+        return false;
+    }
+    else{
+         $.post("../mail/sendEmail.php", {
+            subject:subject,
+            email: email,
+            message: message
+        },
+        function (data, status) {
+            if(status == 'ok'){
+                    $('#subject').val('');
+                    $('#message').val('');
+                    $('.statusMsg').html('<span style="color:green;">Your Message has been Sent.</p>');
+                }else{
+                    $('.statusMsg').html('<span style="color:red;">Some problem occurred, please try again.</span>');
+                }
+        }
+    );
+}
+ }
 var logout = document.getElementById('logout');
 logout.addEventListener('click', function() {
   if (confirm("Are you sure you want to log out?")) {

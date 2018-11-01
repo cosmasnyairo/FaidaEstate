@@ -3,7 +3,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$database = "estate";
+$database = "faida_estate";
 
 $connection_String = mysqli_connect($host,$user,$pass,$database);
  $get_all_announcement_command = "SELECT * FROM general_announcement ORDER BY id DESC";

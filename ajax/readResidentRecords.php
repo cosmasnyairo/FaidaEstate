@@ -4,17 +4,19 @@
 
 	// Design initial table header 
 	$data = '<table class="table table-bordered table-striped">
+						<tr> 
+						<th> All Residents </th> 
+						</tr>
 						<tr>
 							<th>No.</th>
 							<th>Name</th>
 							<th>House Number</th>
 							<th>Email Address</th>
 							<th>Phone Number</th>
-							<th>Update</th>
-							<th>Delete</th>
+							
 						</tr>';
 
-	$query = "SELECT * FROM resident";
+	$query = "SELECT * FROM users";
 
 	if (!$result = mysqli_query($con, $query)) {
         exit(mysqli_error($con));
@@ -32,13 +34,6 @@
 				<td>'.$row['houseNumber'].'</td>
 				<td>'.$row['email'].'</td>
 				<td>'.$row['phoneNo'].'</td>
-				
-				<td>
-					<button onclick="GetUserDetails('.$row['user_id'].')" class="btn btn-warning">Update</button>
-				</td>
-				<td>
-					<button onclick="DeleteUser('.$row['user_id'].')" class="btn btn-danger">Delete</button>
-				</td>
     		</tr>';
     		$number++;
     	}

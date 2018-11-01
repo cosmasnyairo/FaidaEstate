@@ -1,7 +1,15 @@
 <?php
-	$conn = mysqli_connect('localhost', 'root', '', 'estate');
+	$conn = mysqli_connect('localhost', 'root', '', 'faida_estate');
+ 	session_start();
+    $message='';
+	$email=$_POST['email']; 
 
-	$email = $_POST['email'];
+	$length = 10;
+	$code = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
+	echo $code;
+
+	$_SESSION['code'] = $code;
+	$_SESSION['email'] = $email;
 
 	require 'phpmailer/PHPMailerAutoload.php';
 	$mail= new PHPMailer;
@@ -18,45 +26,19 @@
 	$mail->addReplyTo('noreplyfaidaestate@gmail.com');
 
 	$mail->isHTML(true);
-	$mail->subject='Reset Password';
-	$mail->Body='<h2 align=center>Click This Link to Reset Password</h2><br><h4 align=center>http://127.0.0.1/estate/html/resetpassword.html</h4>';
+	$mail->Subject='Reset Password';
+	$mail->Body='<h2 align=center> Your Verification Code is :</h2><br><h4 align=center>'.$code.'</h4>';
 	if($mail->send()){
-		echo "Mail Sent!" .$mail->ErrorInfo;
+	echo '<script language="javascript">';
+    echo 'alert("Please Check Your Email for Verification Code!");';
+    echo "location.href='resetpassword.html';";
+    echo '</script>';
 	}                
 	else{
-		echo "Mail could not be Sent!" .$mail->ErrorInfo;
+		
+	echo '<script language="javascript">';
+    echo 'alert("Email not Sent...Please Retry");';
+    echo "location.href='forgotpassword.html';";
+    echo '</script>';
 	}
 ?>
-<html>  
-    <head>  
-        <title>Reset Password</title>  
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    </head>  
-    <body>  
-        <div class="container">
-   <br />
-   
-   <h3 align="center">Chat Application</a></h3><br />
-   <br />
-   <div class="panel panel-default">
-      <div class="panel-heading">Forgot Password</div>
-    <div class="panel-body">
-     <form method="POST">
-      <p class="text-danger"><?php echo $message; ?></p>
-      <div class="form-group">
-       <label>Enter Email</label>
-       <input type="text" name="email" class="form-control" required />
-      </div>
-      <div class="form-group">
-      
-      </div>
-
-     </form>
-    </div>
-   </div>
-  </div>
-    </body>  
-</html>

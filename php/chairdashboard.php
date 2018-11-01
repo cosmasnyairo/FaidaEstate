@@ -4,7 +4,7 @@ $id = $_SESSION['login_id'];
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "estate";
+$dbname = "faida_estate";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -13,7 +13,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "SELECT * FROM administrator WHERE position = 'Chairperson'";
+$sql = "SELECT * FROM users WHERE user_id = '$id'";
 $result = $conn->query($sql);
 	$result = $conn->query($sql);
 
@@ -31,16 +31,17 @@ $result = $conn->query($sql);
             $data = '<table class="table table-bordered table-striped">
                         <tr>  
                      <td width="30%"><label>Name</label></td>  
-                     <td width="70%">'.$row["name"].'</td>  
+                     <td width="70%">'.$row["username"].'</td>  
                      </tr>  
                     <tr>  
                      <td width="30%"><label>Position</label></td>  
-                     <td width="70%">'.$row["position"].'</td>  
+                     <td width="70%">'.$row["Position"].'</td>  
                     </tr> 
                     <tr>  
-                     <td width="30%"><label>Username</label></td>  
-                     <td width="70%">'.$row["username"].'</td>  
+                     <td width="30%"><label>House Number</label></td>  
+                     <td width="70%">'.$row["houseNumber"].'</td>  
                     </tr> 
+     
                    <tr>  
                      <td width="30%"><label>Email Address</label></td>  
                      <td width="70%">'.$row["email"].'</td>  
@@ -68,7 +69,7 @@ $result = $conn->query($sql);
 <!DOCTYPE html>
 <html>
 <head>
-	<title>e-Nyumba App | Chairperson Home Dashboard</title>
+	<title>e-Nyumba | Dashboard </title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -96,7 +97,7 @@ $result = $conn->query($sql);
 				<i class="fa fa-comments"></i>
 				<span>FAIDA ESTATE</span>
 			</div>
-			<a href="#" class="nav-trigger"><span></span></a>
+		
 </div>
 		<div class="side-nav">
 			<div class="logo">
@@ -112,26 +113,29 @@ $result = $conn->query($sql);
 						</a>
 					</li>
 					<li>
-						<a href="../html/chat.html">
+						<a href="chairchat.php">
 							<span><i class="fa fa-comment-alt"></i></span>
 							<span>Chat</span>
 						</a>
 					</li>
+                    
                     <li>
-						<a href="../html/chat.html">
-							<span><i class="fa fa-envelope"></i></span>
-							<span>Manage Chat Forums</span>
-						</a>
-					</li>
+                        <a href="chairannouncements.php">
+                            <span><i class="fa fa-comment-alt"></i></span>
+                            <span>Announcements</span>
+                        </a>
+                    </li>
+
                     <li>
 						<a href="chairperson_track_payments.php">
 							<span><i class="fas fa-coins"></i></span>
-							<span>Manage Estate Finances</span>
+							<span>Estate Finances</span>
 						</a>
 					</li>
+
                      <li>
-						<a href="../html/track.html">
-							<span><i class="fas fa-truck-loading"></i></span>
+						<a href="chairperson_track_residents.php">
+							<span><i class="fas fa-home"></i></span>
 							<span>Manage Residents</span>
 						</a>
 					</li>
@@ -171,7 +175,7 @@ $result = $conn->query($sql);
             
 <script>
 function readRecords() {
-    $.get("../php/chairdashboard.php", {}, function (data, status) {
+    $.get("../php/chairdashboard.php", {}, function (data, position) {
         $(".records_content").html(data);
     });
 } 

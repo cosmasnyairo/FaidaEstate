@@ -26,6 +26,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', end
 		background: url(../images/houses.jpeg) no-repeat 50% 20%;
 
 	}
+	.bg-image2{
+		
+
+	}
 
 	.container{
 		width: 960px;

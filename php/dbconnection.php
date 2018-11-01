@@ -1,6 +1,6 @@
 <?php 
 
-$connect = new PDO("mysql:host=localhost;dbname=estate;charset=utf8mb4", "root", "");
+$connect = new PDO("mysql:host=localhost;dbname=faida_estate;charset=utf8mb4", "root", "");
 
 date_default_timezone_set('Africa/Nairobi');
 
@@ -54,7 +54,7 @@ function fetch_user_chat_history($from_user_id, $to_user_id, $connect)
 
 function get_user_name($user_id, $connect)
 {
- $query = "SELECT username FROM resident WHERE user_id = '$user_id'";
+ $query = "SELECT username FROM users WHERE user_id = '$user_id'";
  $statement = $connect->prepare($query);
  $statement->execute();
  $result = $statement->fetchAll();

@@ -4,19 +4,19 @@ $id = $_SESSION['login_id'];
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "estate";
+$dbname = "faida_estate";
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
-$query = "SELECT * FROM resident WHERE user_id ='$id'";
+$query = "SELECT * FROM users WHERE user_id ='$id'";
 $result1 = mysqli_query($conn, $query);
 $row1 = mysqli_fetch_row($result1);
-$residentID = $row1[0];
+$userID = $row1[0];
 
-$sql = "SELECT * FROM ((payments INNER JOIN resident ON payments.user_id = resident.user_id)
-INNER JOIN statement ON payments.statementID = statement.statementID) WHERE payments.user_id ='$residentID'";
+$sql = "SELECT * FROM ((payments INNER JOIN users ON payments.user_id = users.user_id)
+INNER JOIN statement ON payments.statementID = statement.statementID) WHERE payments.user_id ='$userID'";
 
 $result = $conn->query($sql);
 
@@ -24,8 +24,7 @@ $conn->close();
 ?>  
 <!DOCTYPE html>
 <html>
-<head>
-	<title>e-Nyumba App | Resident Payments</title>
+<head> <title>e-Nyumba | My Payments </title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -55,11 +54,11 @@ $conn->close();
           <span>FAIDA ESTATE</span>   
         </div>
 
-        <a href="#" class="nav-trigger"><span></span></a>
-         <p align="center" style="margin-top: 15px; margin-right: 60px; text-align: right; color: black; font-weight: bold; ">Welcome, <?php echo $_SESSION['username']; ?></p>
+          <a href="#" class="nav-trigger"><span></span></a>
+         <p align="center" style="margin-top: 15px; margin-right: 60px; text-align: right; color: white; font-weight: bold; "><?php echo $_SESSION['username']; ?></p>
 
     </div>
-    <div class="side-nav">
+   <div class="side-nav">
       <div class="logo">
         <i class="fa fa-comments"></i>
         <span>Faida Estate</span>
@@ -67,14 +66,30 @@ $conn->close();
       <nav>
         <ul>
           <li>
-            <a href="../php/dashboard.php">
+            <a href="dashboard.php">
               <span><i class="fa fa-user"></i></span>
               <span>Profile</span>
             </a>
           </li>
-          
           <li>
-            <a href="../php/finances.php">
+              <a href="chat.php">
+
+                <span><i class="fa fa-envelope"></i></span>
+                <span>Chat</span>
+              </a>
+            </li>
+            
+            <li>
+              <a href="userannouncements.php">
+
+                <span><i class="fa fa-envelope"></i></span>
+                <span>Announcements</span>
+              </a>
+            </li>
+      
+  
+          <li>
+            <a href="finances.php">
               <span><i class="fas fa-folder"></i></span>
               <span>Statements</span>
             </a>
@@ -157,13 +172,13 @@ $conn->close();
 <script>
 $(document).ready(function(){ 
 	$(document).on('click', '.view_data', function(){  
-           var resident_id = $(this).attr("id");  
-           if(resident_id != '')  
+           var user_id = $(this).attr("id");  
+           if(user_id != '')  
            {  
                 $.ajax({  
                      url:"select_payment.php",  
                      method:"POST",  
-                     data:{resident_id:resident_id},  
+                     data:{user_id:user_id},  
                      success:function(data){  
                           $('#resident_detail').html(data);  
                           $('#dataModal').modal('show');  

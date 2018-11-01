@@ -4,7 +4,7 @@ $id = $_SESSION['login_id'];
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "estate";
+$dbname = "faida_estate";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -13,7 +13,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "SELECT * FROM administrator WHERE adminID = '$id'";
+$sql = "SELECT * FROM users WHERE user_id = '$id'";
 $result = $conn->query($sql);
 	$result = $conn->query($sql);
 
@@ -29,17 +29,13 @@ $result = $conn->query($sql);
         while($row = mysqli_fetch_assoc($result))
         {
             $data = '<table class="table table-bordered table-striped">
-                        <tr>  
+                      <tr>  
                      <td width="30%"><label>Name</label></td>  
-                     <td width="70%">'.$row["name"].'</td>  
+                     <td width="70%">'.$row["username"].'</td>  
                      </tr>  
                     <tr>  
                      <td width="30%"><label>Position</label></td>  
-                     <td width="70%">'.$row["position"].'</td>  
-                    </tr> 
-                    <tr>  
-                     <td width="30%"><label>Username</label></td>  
-                     <td width="70%">'.$row["username"].'</td>  
+                     <td width="70%">'.$row["Position"].'</td>  
                     </tr> 
                    <tr>  
                      <td width="30%"><label>Email Address</label></td>  
@@ -68,7 +64,7 @@ $result = $conn->query($sql);
 <!DOCTYPE html>
 <html>
 <head>
-	<title>e-Nyumba App | Chairperson Home Dashboard</title>
+	 <title>e-Nyumba | Admin Dashboard </title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -111,21 +107,16 @@ $result = $conn->query($sql);
 						</a>
 					</li>
 					<li>
-						<a href="admin_manage_residents.php">
+						<a href="admin_manage_users.php">
 							<span><i class="fa fa-users"></i></span>
-							<span>Manage Residents</span>
+							<span>Manage Users</span>
 						</a>
 					</li>
-					<li>
-						<a href="admin_manage_administrators.php">
-							<span><i class="fa fa-user"></i></span>
-							<span>Manage Estate Administrators</span>
-						</a>
-					</li>
+					
 					<li>
 						<a href="admin_manage_requests.php">
 							<span><i class="fab fa-wpforms"></i></span>
-							<span>Manage System Requests</span>
+							<span>Manage Requests</span>
 						</a>
 					</li>
                  

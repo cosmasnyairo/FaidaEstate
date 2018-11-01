@@ -4,7 +4,7 @@ $id = $_SESSION['login_id'];
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "estate";
+$dbname = "faida_estate";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -13,26 +13,82 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "SELECT * FROM administrator WHERE position = 'Secretary'";
+$sql = "SELECT * FROM users WHERE user_id = '$id'";
 $result = $conn->query($sql);
+	$result = $conn->query($sql);
+
+    
+    if (!$result = mysqli_query($conn, $sql)) {
+        exit(mysqli_error($conn));
+    }
+
+    // if query results contains rows then featch those rows 
+    if(mysqli_num_rows($result) > 0)
+    {
+        
+        while($row = mysqli_fetch_assoc($result))
+        {
+            $data = '<table class="table table-bordered table-striped">
+                        <tr>  
+                     <td width="30%"><label>Name</label></td>  
+                     <td width="70%">'.$row["username"].'</td>  
+                     </tr>  
+                    <tr>  
+                     <td width="30%"><label>Position</label></td>  
+                     <td width="70%">'.$row["Position"].'</td>  
+                    </tr> 
+                    <tr>  
+                     <td width="30%"><label>House Number</label></td>  
+                     <td width="70%">'.$row["houseNumber"].'</td>  
+                    </tr> 
+                   <tr>  
+                     <td width="30%"><label>Email Address</label></td>  
+                     <td width="70%">'.$row["email"].'</td>  
+                    </tr>
+                   <tr>  
+                     <td width="30%"><label>Phone Number</label></td>  
+                     <td width="70%"> '.$row["phoneNo"].'</td>  
+                   </tr>
+               
+              
+            </tr>';
+            
+        }
+    }
+    else
+    {
+        // records now found 
+        $data .= '<tr><td colspan="6">Records not found!</td></tr>';
+    }
+
+    $data .= '</table>';
+
+
 	?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>e-Nyumba App | Secretary Home Dashboard</title>
+	<title>e-Nyumba | Profile</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Abel|Montserrat|Patua+One" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="../css/main_dash.css">
     <link rel="icon" type="image/png" href="../Login_v13/images/icons/favicon.ico"/>
-	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+	
 	<script src="../javascript/main.js"></script>
-</head>
-<body>
+	
+    <!-- Latest minified bootstrap css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+     <!-- jQuery library -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+     <!-- Latest minified bootstrap js -->
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 	<div class="header">
 			<div class="logo">
 				<i class="fa fa-comments"></i>
@@ -54,26 +110,27 @@ $result = $conn->query($sql);
 						</a>
 					</li>
 					<li>
-						<a href="../php/index.php">
+						<a href="secretarychat.php">
 							<span><i class="fa fa-envelope"></i></span>
 							<span>Chat</span>
 						</a>
 					</li>
+
 					<li>
-						<a href="../php/announce.php">
+						<a href="secretaryannouncements.php">
 							<span><i class="fa fa-file-alt"></i></span>
-							<span>Post Notices</span>
+							<span>Announcements</span>
 						</a>
 					</li>
-                    <li>
+                    <!-- <li>
 						<a href="../html/track.html">
 							<span><i class="fa fa-upload"></i></span>
 							<span>Upload Documents</span>
 						</a>
-					</li>
+					</li> -->
                  
                     <li>
-						<a id="logout" href="../html/home.html">
+						<a id="logout">
 							<span><i class="fa fa-sign-out"></i></span>
 							<span>Logout</span>
 						</a>
@@ -87,34 +144,113 @@ $result = $conn->query($sql);
 			</div>
 			
 			<div class="main">
-				<div class="widget">
-					<div class="title">My Details</div>
+            <div class="widget">
+					<div class="title">My Details
+                    </div>
 					<div class="chart">
-                    <?php if ($result && $result->num_rows > 0) { // output data of each row
-                    while($row = $result->fetch_assoc()) { ?>
-                      <br/>
-             
-                <article style="font-weight:bold" align="center">  Name: <?php echo $row['name']; ?> </article> <br/>
-                      <br/> 
-                <article style="font-weight:bold" align="center">  Username: <?php echo $row['username']; ?> </article><br/>
-                      <br/> 
-                 <article style="font-weight:bold" align="center"> Position: <?php echo $row['position']; ?> </article> <br/>
-                      <br/>     
-                <article style="font-weight:bold" align="center"> E-mail Address:  <?php echo $row['email']; ?></article> <br/>
-                      <br/>
-                <article style="font-weight:bold" align="center"> Phone Number:  <?php echo $row['phoneNo']; }} ?> </article><br/>
-                      <br/>   
+                    <div class="container">
+    <div class="row">
+        <?php echo $data; ?> 
+            
+    </div>
+    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalForm" style="float: left;">
+                     Contact System Administrator
+                     </button>
                 </div>
-                <div class="title" align="center" ><a onClick="logout(); return false;" href="finances.php"> Edit Account Information </a> </div>
 				</div>
-                
-				<div class="widget">
-					<div class="title">Notices</div>
-					<div class="chart"></div>
-				</div>	
+
+          
+				
+					
 			</div>
             </div>
+        </div>
+        <!-- Modal -->
+<div class="modal fade" id="modalForm" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Contact Form</h4>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <p class="statusMsg"></p>
+                <form role="form">
+                    <div class="form-group">
+                        <label for="inputName">Name</label>
+                        <input type="text" class="form-control" id="inputName" placeholder="Enter your name"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail">Email</label>
+                        <input type="email" class="form-control" id="inputEmail" placeholder="Enter your email"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputMessage">Message</label>
+                        <textarea class="form-control" id="inputMessage" placeholder="Enter your message"></textarea>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary submitBtn" onclick="submitContactForm()">SUBMIT</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script> 
+	function submitContactForm(){
+    var reg = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+    var name = $('#inputName').val();
+    var email = $('#inputEmail').val();
+    var message = $('#inputMessage').val();
+    if(name.trim() == '' ){
+        alert('Please enter your name.');
+        $('#inputName').focus();
+        return false;
+    }else if(email.trim() == '' ){
+        alert('Please enter your email.');
+        $('#inputEmail').focus();
+        return false;
+    }else if(email.trim() != '' && !reg.test(email)){
+        alert('Please enter valid email.');
+        $('#inputEmail').focus();
+        return false;
+    }else if(message.trim() == '' ){
+        alert('Please enter your message.');
+        $('#inputMessage').focus();
+        return false;
+    }else{
+        $.ajax({
+            type:'POST',
+            url:'../php/submit_form.php',
+            data:'contactFrmSubmit=1&name='+name+'&email='+email+'&message='+message,
+            beforeSend: function () {
+                $('.submitBtn').attr("disabled","disabled");
+                $('.modal-body').css('opacity', '.5');
+            },
+            success:function(msg){
+                if(msg == 'ok'){
+                    $('#inputName').val('');
+                    $('#inputEmail').val('');
+                    $('#inputMessage').val('');
+                    $('.statusMsg').html('<span style="color:green;">Thanks for contacting us, we\'ll get back to you soon.</p>');
+                }else{
+                    $('.statusMsg').html('<span style="color:red;">Some problem occurred, please try again.</span>');
+                }
+                $('.submitBtn').removeAttr("disabled");
+                $('.modal-body').css('opacity', '');
+            }
+        });
+    }
+}
 var logout = document.getElementById('logout');
 logout.addEventListener('click', function() {
   if (confirm("Are you sure you want to log out?")) {

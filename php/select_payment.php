@@ -4,18 +4,18 @@ $id = $_SESSION['login_id'];
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "estate";
+$dbname = "faida_estate";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
-if(isset($_POST["resident_id"]))  
+if(isset($_POST["user_id"]))  
  {  
       $output = '';  
       
       $query = $sql = "SELECT * FROM 
-      ((payments INNER JOIN resident ON payments.user_id = resident.user_id)
+      ((payments INNER JOIN users ON payments.user_id = users.user_id)
       INNER JOIN statement ON payments.statementID = statement.statementID) 
-      WHERE paymentID = '".$_POST["resident_id"]."'"; 
+      WHERE paymentID = '".$_POST["user_id"]."'"; 
       $result = mysqli_query($conn, $query);  
       $output .= '  
            <table class="table table-bordered">';  
