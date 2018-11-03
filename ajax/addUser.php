@@ -13,7 +13,7 @@
 		$phoneNo = $_POST['phoneNo'];
 		$username = $_POST['username'];
 		$password = $_POST['password'];
-
+		$password= password_hash($password, PASSWORD_DEFAULT);
 		$query = "INSERT INTO users (username, position, houseNumber, email, phoneNo, password) VALUES( '$username' , '$position', '$houseNumber', '$email', '$phoneNo',  '$password')" ; 
 
 		if (!$result = mysqli_query($con, $query)) {

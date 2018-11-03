@@ -8,7 +8,10 @@ if(!isset($_SESSION['user_id']))
 {
  header("location:login.php");
 }
-
+if( $_SESSION['Position'] != 'Treasurer')
+{
+  header("location:login.php");
+}
 ?>
 
 <html>
@@ -84,7 +87,7 @@ if(!isset($_SESSION['user_id']))
           <li>
               <a href="treasurerannouncements.php">
 
-                <span><i class="fa fa-envelope"></i></span>
+                <span><i class="fa fa-bell"></i></span>
                 <span>Announcements</span>
               </a>
           </li>

@@ -6,6 +6,10 @@ $username = "root";
 $password = "";
 $dbname = "faida_estate";
 
+if( $_SESSION['Position'] != 'Administrator')
+{
+	header("location:login.php");
+}
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection

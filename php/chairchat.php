@@ -8,7 +8,10 @@ if(!isset($_SESSION['user_id']))
 {
  header("location:login.php");
 }
-
+if( $_SESSION['Position'] != 'Chairperson')
+{
+  header("location:login.php");
+}
 ?>
 
 <html>
@@ -20,6 +23,8 @@ if(!isset($_SESSION['user_id']))
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link href="https://fonts.googleapis.com/css?family=Abel|Montserrat|Patua+One" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="../css/main_dash.css">
   <link rel="stylesheet" type="text/css" href="../css/index.css">
@@ -84,14 +89,14 @@ if(!isset($_SESSION['user_id']))
           <li>
             <a href="chairannouncements.php">
 
-              <span><i class="fa fa-envelope"></i></span>
+              <span><i class="fa fa-bell"></i></span>
               <span>Announcements</span>
             </a>
           </li>
           
           <li>
             <a href="chairperson_track_payments.php">
-              <span><i class="fa fa-coins"></i></span>
+              <span><i class="fas fa-coins"></i></span>
               <span>Estate Finances</span>
             </a>
           </li>

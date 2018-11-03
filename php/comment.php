@@ -6,10 +6,13 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
  </head>
- <body>
+ <body style=" 
+background: linear-gradient(to top, rgba(1,1,1,1) 0%,rgba(1,1,0,1) 3%,rgba(0,0,1,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */">
   <br />
   <h2 align="center">Feedback System Faida Estate</h2>
-  <h6 align="right" style="margin-right: 110px;"><a href="../html/home.html"> Home </a></h6>
+  <h6 align="right" style="margin-right: 110px;"><a href="../html/home.html"> 
+     <input type="submit" name="submit" id="submit" class="btn btn-info" value="Back to Home" /> </a></h6>
   <br />
   <div class="container">
    <form method="POST" id="comment_form">

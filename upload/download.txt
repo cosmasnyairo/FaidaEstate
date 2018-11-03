@@ -1,0 +1,29 @@
+
+				<table class="table" bordered="1">
+					<tr>
+						<th> Sender </th>
+						<th> Chat Message </th>
+						<th> Time </th>
+					</tr>
+			
+				<table class="table" bordered="1">
+					<tr>
+						<td>cosmas</th>
+					    <td>Hey there</th>
+						<td>2018-10-20 20:12:46</th>
+					</tr>
+			
+				<table class="table" bordered="1">
+					<tr>
+						<td>kulthum</th>
+					    <td>I am Groot</th>
+						<td>2018-10-20 20:12:21</th>
+					</tr>
+			
+				<table class="table" bordered="1">
+					<tr>
+						<td>kulthum</th>
+					    <td>Hi<div><br></div></th>
+						<td>2018-10-20 20:12:14</th>
+					</tr>
+			</table>

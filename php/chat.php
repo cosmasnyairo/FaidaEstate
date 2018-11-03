@@ -9,6 +9,11 @@ if(!isset($_SESSION['user_id']))
  header("location:login.php");
 }
 
+if( $_SESSION['Position'] != 'Resident')
+{
+  header("location:login.php");
+}
+
 ?>
 
 <html>
@@ -19,6 +24,8 @@ if(!isset($_SESSION['user_id']))
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link href="https://fonts.googleapis.com/css?family=Abel|Montserrat|Patua+One" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="../css/main_dash.css">
   <link rel="stylesheet" type="text/css" href="../css/index.css">
@@ -83,7 +90,7 @@ if(!isset($_SESSION['user_id']))
           <li>
               <a href="userannouncements.php">
 
-                <span><i class="fa fa-envelope"></i></span>
+                <span><i class="fa fa-bell"></i></span>
                 <span>Announcements</span>
               </a>
             </li>
@@ -91,7 +98,7 @@ if(!isset($_SESSION['user_id']))
   
           <li>
             <a href="finances.php">
-              <span><i class="fas fa-folder"></i></span>
+              <span><i class="fa fa-folder"></i></span>
               <span>Statements</span>
             </a>
           </li>
@@ -171,6 +178,9 @@ if(!isset($_SESSION['user_id']))
     cursor: pointer;
 }
 
+
+
+
 </style>  
 
 <div id="group_chat_dialog" title="Group Chat Window">
@@ -185,10 +195,12 @@ if(!isset($_SESSION['user_id']))
    </div>
    <div class="image_upload">
     <form id="uploadImage" method="post" action="upload.php">
-     <label for="uploadFile"><img src="../images/upload.png"/></label>
-     <input type="file" name="uploadFile" id="uploadFile" accept=".jpg, .png" />
+     <label for="uploadFile"><img src="../images/upload.png" title="Upload Images"/></label>
+     <input type="file" name="uploadFile" id="uploadFile" accept=".jpg, .png, .txt" />
     </form>
    </div>
+   <br>
+
   </div>
  </div>
  <div class="form-group" align="right">

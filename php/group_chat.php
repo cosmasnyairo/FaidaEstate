@@ -11,12 +11,13 @@ if($_POST["action"] == "insert_data")
  $data = array(
   ':from_user_id'  => $_SESSION["user_id"],
   ':chat_message'  => $_POST['chat_message'],
+  ':sender'  => $_SESSION['username'],
   ':status'   => '1'
  );
 
  $query = "
- INSERT INTO estate_forum (from_user_id, chat_message, status) 
- VALUES (:from_user_id, :chat_message, :status)
+ INSERT INTO estate_forum (from_user_id, chat_message, sender,status) 
+ VALUES (:from_user_id, :chat_message, :sender, :status)
  ";
 
  $statement = $connect->prepare($query);

@@ -6,6 +6,10 @@ $username = "root";
 $password = "";
 $dbname = "faida_estate";
 
+if( $_SESSION['Position'] != 'Chairperson')
+{
+  header("location:login.php");
+}
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -99,13 +103,13 @@ $result1 = $conn->query($query);
                     </li>
                     <li>
                         <a href="chairchat.php">
-                            <span><i class="fa fa-comment-alt"></i></span>
+                            <span><i class="fa fa-envelope"></i></span>
                             <span>Chat</span>
                         </a>
                     </li>
                     <li>
                         <a href="chairannouncements.php">
-                            <span><i class="fa fa-envelope"></i></span>
+                            <span><i class="fa fa-bell"></i></span>
                             <span>Announcements</span>
                         </a>
                     </li>

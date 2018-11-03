@@ -5,6 +5,12 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "faida_estate";
+
+if( $_SESSION['Position'] != 'Resident')
+{
+  header("location:login.php");
+}
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
@@ -82,7 +88,7 @@ $conn->close();
             <li>
               <a href="userannouncements.php">
 
-                <span><i class="fa fa-envelope"></i></span>
+                <span><i class="fa fa-bell"></i></span>
                 <span>Announcements</span>
               </a>
             </li>

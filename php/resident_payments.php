@@ -76,7 +76,7 @@ $conn->close();
           </li>
           <li>
             <a href="treasurerannouncements.php">
-              <span><i class="fa fa-envelope"></i></span>
+              <span><i class="fa fa-bell"></i></span>
               <span>Announcements</span>
             </a>
           </li>

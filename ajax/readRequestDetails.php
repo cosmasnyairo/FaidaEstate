@@ -1,13 +1,11 @@
 <?php
 // include Database connection file
 include("db_connection.php");
-
 // check request
 if(isset($_POST['requestID']) && isset($_POST['requestID']) != "")
 {
     // get User ID
     $requestID = $_POST['requestID'];
-
     // Get User Details
     $query = "SELECT * FROM admin_requests WHERE requestID = '$requestID'";
     if (!$result = mysqli_query($con, $query)) {

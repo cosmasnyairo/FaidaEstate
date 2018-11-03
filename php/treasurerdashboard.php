@@ -6,6 +6,11 @@ $username = "root";
 $password = "";
 $dbname = "faida_estate";
 
+if( $_SESSION['Position'] != 'Treasurer')
+{
+  header("location:login.php");
+}
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -116,7 +121,7 @@ $result = $conn->query($sql);
 					</li>
                     <li>
                         <a href="treasurerannouncements.php">
-                            <span><i class="fa fa-envelope"></i></span>
+                            <span><i class="fa fa-bell"></i></span>
                             <span>Announcements</span>
                         </a>
                     </li>

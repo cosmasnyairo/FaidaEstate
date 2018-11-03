@@ -45,7 +45,8 @@ $result6 = $conn->query($sql6);
  if(!$result6) {
      echo $conn->error;
   }
-  $sql7 = "SELECT * FROM statement WHERE month = '2018-12'"; 
+
+$sql7 = "SELECT * FROM statement WHERE month = '2018-12'"; 
 $result7 = $conn->query($sql7);
  if(!$result7) {
      echo $conn->error;
@@ -132,7 +133,7 @@ $result7 = $conn->query($sql7);
             <li>
               <a href="userannouncements.php">
 
-                <span><i class="fa fa-bell"></i></span>
+                <span><i class="fa fa-envelope"></i></span>
                 <span>Announcements</span>
               </a>
             </li>
@@ -580,13 +581,13 @@ $result7 = $conn->query($sql7);
         <?php } }else {
         echo "No receipt yet.";
       }
-	  $conn->close();
+	 
       ?> 
              </div>
           </div>
-             </div>  
+             </div> 
 
-			<button class="accordion">December</button>
+             <button class="accordion">December</button>
             <div class="panel">
              <div class="login-page">
            <div class="form">
@@ -649,14 +650,13 @@ $result7 = $conn->query($sql7);
         <?php } }else {
         echo "No receipt yet.";
       }
-      error_reporting(0);
     $conn->close();
       ?> 
              </div>
           </div>
              </div>   
 
-      </div>
+			</div>
 		
 <script>
 var acc = document.getElementsByClassName("accordion");

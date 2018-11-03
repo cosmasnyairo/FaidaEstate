@@ -6,6 +6,11 @@ $username = "root";
 $password = "";
 $dbname = "faida_estate";
 
+
+if( $_SESSION['Position'] != 'Secretary')
+{
+  header("location:login.php");
+}
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -118,7 +123,7 @@ $result = $conn->query($sql);
 
 					<li>
 						<a href="secretaryannouncements.php">
-							<span><i class="fa fa-file-alt"></i></span>
+							<span><i class="fa fa-bell"></i></span>
 							<span>Announcements</span>
 						</a>
 					</li>
@@ -152,10 +157,13 @@ $result = $conn->query($sql);
     <div class="row">
         <?php echo $data; ?> 
             
-    </div>
-    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalForm" style="float: left;">
+    </div>          
+        
+                <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalForm" style="float: left;">
                      Contact System Administrator
-                     </button>
+                </button>
+
+
                 </div>
 				</div>
 

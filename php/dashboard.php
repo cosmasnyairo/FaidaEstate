@@ -11,6 +11,11 @@ if(!isset($_SESSION['user_id']))
  header("location:login.php");
 }
 
+if( $_SESSION['Position'] != 'Resident')
+{
+  header("location:login.php");
+}
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -124,7 +129,7 @@ $result = $conn->query($sql);
                     <li>
                         <a href="userannouncements.php">
 
-                        <span><i class="fa fa-envelope"></i></span>
+                        <span><i class="fas fa-bell"></i></span>
                         <span>Announcements</span>
                       </a>
                     </li>

@@ -9,6 +9,11 @@ if(!isset($_SESSION['user_id']))
  header("location:login.php");
 }
 
+if( $_SESSION['Position'] != 'Secretary')
+{
+  header("location:login.php");
+}
+
 ?>
 
 <html>
@@ -17,6 +22,8 @@ if(!isset($_SESSION['user_id']))
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   
   <link href="https://fonts.googleapis.com/css?family=Abel|Montserrat|Patua+One" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -83,7 +90,7 @@ if(!isset($_SESSION['user_id']))
           <li>
             <a href="secretaryannouncements.php">
 
-              <span><i class="fa fa-envelope"></i></span>
+              <span><i class="fa fa-bell"></i></span>
               <span>Announcements</span>
             </a>
           </li>
@@ -104,7 +111,7 @@ if(!isset($_SESSION['user_id']))
         <div class="table-responsive">  
          <p></p>
           <input type="hidden" id="is_active_group_chat_window" value="no" />
-         <!--  <button onclick="toggle_div_fun('sectiontohide');" class="btn btn-success btn-xs "> Start Forum</button> -->
+         <!-- <button onclick="toggle_div_fun('sectiontohide');" class="btn btn-success btn-xs "> Start Forum</button> -->
           <div id="sectiontohide">
           <button  "type="button" name="group_chat" id="group_chat" class="btn btn-warning btn-xs ">Estate Forum</button>
           </div>
@@ -115,6 +122,11 @@ if(!isset($_SESSION['user_id']))
           
           
         </div>
+        <div class="table-responsive">
+    <form method="post" action="excel.php" >
+      <input type="submit" name="export_excel" class="btn btn-success" value="Generate Forum History(Excel)" style="margin-left: 80px;">
+    </form>
+  </div>
       </div>
     </div>
     </body>  
@@ -172,7 +184,7 @@ if(!isset($_SESSION['user_id']))
    </div>
    <div class="image_upload">
     <form id="uploadImage" method="post" action="upload.php">
-     <label for="uploadFile"><img src="upload.png"/></label>
+     <label for="uploadFile"><img src="../images/upload.png"/></label>
      <input type="file" name="uploadFile" id="uploadFile" accept=".jpg, .png" />
     </form>
    </div>

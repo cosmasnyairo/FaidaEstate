@@ -6,6 +6,11 @@ $username = "root";
 $password = "";
 $dbname = "faida_estate";
 
+if( $_SESSION['Position'] != 'Administrator')
+{
+  header("location:login.php");
+}
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -84,12 +89,13 @@ if ($conn->connect_error) {
             <div class="records_content"></div>
         </div>
     </div>
-</div>
 
+</div>
  <!-- /Content Section -->
 
 
 <!-- Bootstrap Modals -->
+
 <!-- Modal - Update User details -->
 <div class="modal fade" id="update_user_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">

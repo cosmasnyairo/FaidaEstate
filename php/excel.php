@@ -1,4 +1,5 @@
 <?php 
+session_start();
 	$connect=mysqli_connect("localhost","root","","chat");
 	$output='';
 	$from='$_POST["from"]';
@@ -24,7 +25,7 @@
 				$output .='
 				<table class="table" bordered="1">
 					<tr>
-						<td>'.$row['Sender'].'</th>
+						<td>'.$_SESSION['username'].'</th>
 					    <td>'.$row['chat_message'].'</th>
 						<td>'.$row['timestamp'].'</th>
 					</tr>
@@ -32,7 +33,7 @@
 			}
 			$output .='</table>';
 			header("Content-Type: application/xls");
-			header("Content-Disposition:attachment; filename=download.xls");	
+			header("Content-Disposition:attachment; filename=history.xls");	
 			echo $output;
 		}
 	}

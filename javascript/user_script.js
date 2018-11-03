@@ -34,7 +34,9 @@ function addRecord() {
         $("#email").val("");
         $("#phoneNo").val("");
         $("#password").val("");
+        
     });
+
 }
 
 // READ records

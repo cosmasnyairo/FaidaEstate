@@ -10,6 +10,11 @@
   {
    header('location:login.php');
   }
+
+if( $_SESSION['Position'] != 'Secretary')
+{
+  header("location:login.php");
+}
   ?>  
 
 
@@ -71,7 +76,7 @@
             <li class="active">
               <a href="#">
 
-                <span><i class="fa fa-envelope"></i></span>
+                <span><i class="fa fa-bell"></i></span>
                 <span>Announcements</span>
               </a>
             </li>
@@ -91,6 +96,9 @@
 
         <div class="announcement_page">
           <div class="row row-adjusted">
+            <?php 
+              include('get_announcements.php');
+            ?>
 
           </div>
         </div>
@@ -103,14 +111,14 @@
         <hr>
       </div>
 
-      <form method="post" action="">
+      <form method="post" action="announce.php">
         <div class="form-group">
              <label for="txt_title" class="msg_title">Message Title</label>
-             <input type="text" class="txt_title form-control form-control-adjusted" id="txt_title" placeholder="Enter message title">
+             <input type="text" class="txt_title form-control form-control-adjusted" name="txt_title" id="txt_title" placeholder="Enter message title">
         </div>
       <div class="form-group">
         <label for="txt_announcement" class="msg_title">Message </label>
-        <textarea  class="form-control" id="txt_announcement" placeholder="Enter announcement here"></textarea>
+        <textarea  class="form-control" id="txt_announcement" placeholder="Enter announcement here" name="txt_announcement"></textarea>
       </div>
       <div class="form-group" id="btn_holder">
       <button class="btn btn-primary" id="btn_post">Post</button>
@@ -144,34 +152,3 @@
        });
          });
   </script>
-
-  <?php
-  error_reporting(0);
-  $host = "localhost";
-  $user = "root";
-  $pass = "";
-  $database = "faida_estate";
-  session_start();
-
-  if(!isset($_SESSION['user_id']))
-  {
-   header('location:login.php');
-  }
-    $host = "localhost";
-    $user = "root";
-    $pass = "";
-    $database = "faida_estate";
-
-    $connection_String = mysqli_connect($host,$user,$pass,$database);
-     $message_title = $_POST["title"];
-     $message_body = $_POST["message"];
-     $message_sender = $_SESSION['username'];;
-
-      if($message_title!=""&& $message_body!=""){
-
-        $insert_query_command = "INSERT INTO general_announcement (`id`, `message_title`, `message_body`, `sender`, `date`) VALUES (NULL, '$message_title', '$message_body', '$message_sender', CURRENT_TIMESTAMP)";
-        $execute_insert_query = mysqli_query($connection_String,$insert_query_command);
-      }
-      
-    ?>
-   

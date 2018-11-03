@@ -1,4 +1,3 @@
-
 function DeleteUser(pendingID) {
     var conf = confirm("Are you sure you want to delete this user?");
     if (conf == true) {
