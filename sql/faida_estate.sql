@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2018 at 10:13 PM
--- Server version: 10.1.26-MariaDB
--- PHP Version: 7.1.8
+-- Generation Time: Mar 09, 2019 at 03:51 AM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 7.0.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -42,9 +40,7 @@ CREATE TABLE `admin_requests` (
 INSERT INTO `admin_requests` (`requestID`, `name`, `email`, `message`) VALUES
 (1, 'Allan', 'vikiruallan12@gmail.com', 'Hey'),
 (13, 'Tom Rotich', 'trot@j.com', 'Change of emaail'),
-(14, 'SusanOrina', 'sorina@gmail.com', 'Hi there'),
-(15, 'Susan Orina', 'sorina@gmail.com', 'Need more tools'),
-(16, 'Cosmas Nyairo', 'nyairocosmas@gmail.com', 'Hey');
+(14, 'SusanOrina', 'sorina@gmail.com', 'Hi there');
 
 -- --------------------------------------------------------
 
@@ -87,15 +83,17 @@ INSERT INTO `chat_message` (`chat_message_id`, `to_user_id`, `from_user_id`, `ch
 (19, 1, 2, 'Hi', '2018-10-30 07:25:05', 0),
 (20, 1, 2, 'Yo', '2018-10-30 07:43:17', 0),
 (21, 1, 2, 'yo', '2018-10-30 07:43:22', 0),
-(22, 2, 1, 'nfnd', '2018-10-30 07:44:02', 1),
-(23, 6, 1, 'g', '2018-10-30 13:05:34', 0),
-(24, 6, 1, '', '2018-10-30 13:05:34', 0),
+(22, 2, 1, 'nfnd', '2018-10-30 07:44:02', 0),
+(23, 6, 1, 'g', '2018-10-30 13:05:34', 1),
+(24, 6, 1, '', '2018-10-30 13:05:34', 1),
 (25, 1, 4, 'Hello', '2018-10-30 13:44:01', 0),
 (26, 4, 1, 'ytyg', '2018-10-30 13:44:24', 0),
 (27, 1, 4, '😂😂', '2018-10-30 13:44:43', 0),
 (28, 4, 1, '😂😂', '2018-10-30 13:44:51', 1),
-(29, 2, 4, 'hgn', '2018-11-01 08:12:06', 1),
-(30, 1, 12, 'Hello!', '2018-11-03 19:01:47', 1);
+(29, 2, 4, 'hgn', '2018-11-01 08:12:06', 0),
+(30, 2, 3, 'Hey Mary!\n\n', '2019-02-27 12:23:39', 0),
+(31, 4, 2, 'Hi\n', '2019-02-27 12:24:36', 1),
+(32, 1, 2, '🤠', '2019-02-27 12:24:53', 1);
 
 -- --------------------------------------------------------
 
@@ -107,7 +105,6 @@ CREATE TABLE `estate_forum` (
   `chat_message_id` int(11) NOT NULL,
   `to_user_id` int(11) NOT NULL,
   `from_user_id` int(11) NOT NULL,
-  `Sender` varchar(20) COLLATE utf8mb4_bin NOT NULL,
   `chat_message` text COLLATE utf8mb4_bin NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` int(1) NOT NULL
@@ -117,16 +114,15 @@ CREATE TABLE `estate_forum` (
 -- Dumping data for table `estate_forum`
 --
 
-INSERT INTO `estate_forum` (`chat_message_id`, `to_user_id`, `from_user_id`, `Sender`, `chat_message`, `timestamp`, `status`) VALUES
-(1, 0, 6, 'Tom Rotich', '<p><img src=\"../upload/bandicam.jpg\" class=\"img-thumbnail\" width=\"200\" height=\"160\"></p>Wall', '2018-11-01 21:50:55', 1),
-(2, 0, 6, 'Tom Rotich', 'Hello', '2018-11-01 21:51:39', 1),
-(3, 0, 6, 'Tom Rotich', '<p><img src=\"../upload/images.jpg\" class=\"img-thumbnail\" width=\"200\" height=\"160\"></p>Avengers', '2018-11-02 07:44:56', 1),
-(4, 0, 1, 'Cosmas Nyairo', '\n\n   ', '2018-11-03 20:44:55', 1),
-(5, 0, 1, 'Cosmas Nyairo', '\n\n   ', '2018-11-03 20:44:55', 1),
-(6, 0, 1, 'Cosmas Nyairo', '<p><img src=\"../upload/download.txt\" class=\"img-thumbnail\" width=\"200\" height=\"160\"></p><br>', '2018-11-03 20:53:09', 1),
-(7, 0, 1, 'Cosmas Nyairo', '<p><img src=\"../upload/diar.txt\"></p><br>', '2018-11-03 20:56:37', 1),
-(8, 0, 1, 'Cosmas Nyairo', '<br>\n<b>Notice</b>:  Undefined index: extension in <b>C:\\xampp\\htdocs\\Festate\\FaidaEstate\\php\\upload.php</b> on line <b>8</b><br>\n<br>\n<b>Notice</b>:  Undefined index: uploaded_file in <b>C:\\xampp\\htdocs\\Festate\\FaidaEstate\\php\\upload.php</b> on line <b>20</b><br>\n<br>\n<b>Notice</b>:  Undefined index: uploaded_file in <b>C:\\xampp\\htdocs\\Festate\\FaidaEstate\\php\\upload.php</b> on line <b>21</b><br>\nThere was an error uploading the file, please try again!', '2018-11-03 21:01:56', 1),
-(9, 0, 1, 'Cosmas Nyairo', '<p><img src=\"../upload/j.PNG\" class=\"img-thumbnail\" width=\"200\" height=\"160\"></p><br>', '2018-11-03 21:02:20', 1);
+INSERT INTO `estate_forum` (`chat_message_id`, `to_user_id`, `from_user_id`, `chat_message`, `timestamp`, `status`) VALUES
+(0, 0, 2, 'f\n\n   ', '2018-10-29 18:22:59', 1),
+(0, 0, 2, '<p><img src="upload/jdk.jpg" class="img-thumbnail" width="200" height="160"></p><br>', '2018-10-29 18:30:24', 1),
+(0, 0, 2, 'J\n\n   ', '2018-10-30 07:43:10', 1),
+(0, 0, 1, '<p><img src="../upload/Je suis.jpg" class="img-thumbnail" width="200" height="160"></p><br>', '2018-11-01 08:41:13', 1),
+(0, 0, 3, '<p><img src="../upload/PickingaProgrammingLangauge.png" class="img-thumbnail" width="200" height="160"></p><br>', '2019-02-27 12:23:11', 1),
+(0, 0, 3, '<div>Hi</div><div><br></div>', '2019-02-27 12:23:21', 1),
+(0, 0, 2, '<p><img src="../upload/263146458005202.jpg" class="img-thumbnail" width="200" height="160"></p><br>', '2019-02-27 12:25:06', 1),
+(0, 0, 3, 'yooooo', '2019-03-05 10:35:52', 1);
 
 -- --------------------------------------------------------
 
@@ -154,9 +150,7 @@ INSERT INTO `general_announcement` (`id`, `message_title`, `message_body`, `send
 (7, 'Hi ', 'HI son', 'cosmas', '2018-10-15 09:38:16'),
 (8, 'Testing', 'JUH FS', 'cosmas', '2018-10-25 05:08:30'),
 (9, 'Meeting at noon', 'Please Attend', 'cosmas', '2018-10-25 05:08:52'),
-(10, 'Gummy Bear', 'They call me gummy bear', 'cosmas', '2018-10-25 05:18:48'),
-(11, 'gftgauiejd', 'gtyatddasy', 'Tom Rotich', '2018-11-02 07:36:51'),
-(12, 'hdvhagfyhj', 'vuyfcdgvubhjnhugfcygvhbjkljhgfdtstfghjk', 'Tom Rotich', '2018-11-02 07:44:04');
+(10, 'Gummy Bear', 'They call me gummy bear', 'cosmas', '2018-10-25 05:18:48');
 
 -- --------------------------------------------------------
 
@@ -254,69 +248,74 @@ INSERT INTO `login_details` (`login_details_id`, `user_id`, `last_activity`, `is
 (76, 5, '2018-11-01 11:22:13', 'no'),
 (77, 2, '2018-11-01 11:23:00', 'no'),
 (78, 2, '2018-11-01 11:24:41', 'no'),
-(79, 2, '2018-11-01 19:58:17', 'no'),
-(80, 1, '2018-11-01 20:50:45', 'no'),
-(81, 4, '2018-11-01 20:51:23', 'no'),
-(82, 6, '2018-11-01 20:53:29', 'no'),
-(83, 1, '2018-11-01 20:53:54', 'no'),
-(84, 1, '2018-11-01 20:55:53', 'no'),
-(85, 1, '2018-11-01 20:56:17', 'no'),
-(86, 1, '2018-11-01 20:59:03', 'no'),
-(87, 6, '2018-11-01 21:54:30', 'no'),
-(88, 5, '2018-11-01 21:56:56', 'no'),
-(89, 1, '2018-11-02 06:56:39', 'no'),
-(90, 2, '2018-11-02 07:00:48', 'no'),
-(91, 4, '2018-11-02 07:04:43', 'no'),
-(92, 5, '2018-11-02 07:06:27', 'no'),
-(93, 5, '2018-11-02 07:06:54', 'no'),
-(94, 5, '2018-11-02 07:07:29', 'no'),
-(95, 2, '2018-11-02 07:08:27', 'no'),
-(96, 4, '2018-11-02 07:08:47', 'no'),
-(97, 6, '2018-11-02 07:10:09', 'no'),
-(98, 2, '2018-11-02 07:42:42', 'no'),
-(99, 6, '2018-11-02 07:44:57', 'no'),
-(100, 6, '2018-11-03 15:46:09', 'no'),
-(101, 2, '2018-11-03 15:48:10', 'no'),
-(102, 5, '2018-11-03 15:48:40', 'no'),
-(103, 4, '2018-11-03 15:49:10', 'no'),
-(104, 1, '2018-11-03 15:55:08', 'no'),
-(105, 1, '2018-11-03 16:05:06', 'no'),
-(106, 5, '2018-11-03 16:06:36', 'no'),
-(107, 1, '2018-11-03 16:06:58', 'no'),
-(108, 5, '2018-11-03 16:08:00', 'no'),
-(109, 2, '2018-11-03 16:08:12', 'no'),
-(110, 5, '2018-11-03 16:09:15', 'no'),
-(111, 5, '2018-11-03 17:23:41', 'no'),
-(112, 5, '2018-11-03 17:42:39', 'no'),
-(113, 5, '2018-11-03 18:51:25', 'no'),
-(114, 12, '2018-11-03 19:01:49', 'no'),
-(115, 5, '2018-11-03 19:01:57', 'no'),
-(116, 5, '2018-11-03 19:20:58', 'no'),
-(117, 1, '2018-11-03 19:51:30', 'no'),
-(118, 1, '2018-11-03 21:02:35', 'no');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `new_residents`
---
-
-CREATE TABLE `new_residents` (
-  `pendingID` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `houseNumber` varchar(10) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `phoneNo` varchar(12) DEFAULT NULL,
-  `status` varchar(255) NOT NULL DEFAULT 'Not Verified'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `new_residents`
---
-
-INSERT INTO `new_residents` (`pendingID`, `name`, `houseNumber`, `email`, `phoneNo`, `status`) VALUES
-(1, 'Tony Kamau', '99', 'tony.kamau@gmail.com', '254789098231', 'Verified'),
-(4, 'george', 'b4', 'george.george@gmail.com', '23487623', 'Verified');
+(79, 2, '2018-11-01 16:51:52', 'no'),
+(80, 5, '2018-11-01 16:52:31', 'no'),
+(81, 3, '2018-11-01 16:56:29', 'no'),
+(82, 5, '2018-11-01 16:57:58', 'no'),
+(83, 5, '2018-11-01 16:58:49', 'no'),
+(84, 5, '2018-11-01 17:03:15', 'no'),
+(85, 4, '2018-11-01 22:57:15', 'no'),
+(86, 3, '2018-11-01 22:58:08', 'no'),
+(87, 1, '2018-11-02 05:22:02', 'no'),
+(88, 2, '2018-11-02 05:29:57', 'no'),
+(89, 6, '2018-11-02 05:36:30', 'no'),
+(90, 4, '2018-11-02 05:42:08', 'no'),
+(91, 5, '2018-11-02 05:46:47', 'no'),
+(92, 2, '2018-11-05 04:56:59', 'no'),
+(93, 5, '2018-11-05 05:00:54', 'no'),
+(94, 3, '2018-11-09 06:39:31', 'no'),
+(95, 3, '2019-02-27 07:46:29', 'no'),
+(96, 5, '2019-02-27 08:45:58', 'no'),
+(97, 3, '2019-02-27 09:13:58', 'no'),
+(98, 2, '2019-02-27 09:25:15', 'no'),
+(99, 3, '2019-02-27 12:23:41', 'no'),
+(100, 2, '2019-02-27 12:25:11', 'no'),
+(101, 4, '2019-02-27 12:28:48', 'no'),
+(102, 6, '2019-02-27 12:30:10', 'no'),
+(103, 1, '2019-02-27 12:30:58', 'no'),
+(104, 4, '2019-03-04 08:48:44', 'no'),
+(105, 4, '2019-03-04 09:09:49', 'no'),
+(106, 4, '2019-03-04 09:23:23', 'no'),
+(107, 3, '2019-03-04 09:24:14', 'no'),
+(108, 4, '2019-03-04 10:22:09', 'no'),
+(109, 4, '2019-03-04 10:26:41', 'no'),
+(110, 3, '2019-03-04 10:29:28', 'no'),
+(111, 4, '2019-03-04 11:13:37', 'no'),
+(112, 3, '2019-03-04 11:15:07', 'no'),
+(113, 3, '2019-03-04 11:21:10', 'no'),
+(114, 4, '2019-03-04 11:38:41', 'no'),
+(115, 5, '2019-03-05 09:56:37', 'no'),
+(116, 3, '2019-03-05 10:36:50', 'no'),
+(117, 5, '2019-03-05 10:37:00', 'no'),
+(118, 5, '2019-03-05 12:00:48', 'no'),
+(119, 2, '2019-03-05 13:07:30', 'no'),
+(120, 5, '2019-03-05 13:09:17', 'no'),
+(121, 2, '2019-03-05 13:30:50', 'no'),
+(122, 5, '2019-03-05 13:44:02', 'no'),
+(123, 2, '2019-03-05 13:44:31', 'no'),
+(124, 2, '2019-03-05 13:45:22', 'no'),
+(125, 2, '2019-03-06 10:36:03', 'no'),
+(126, 3, '2019-03-08 08:31:49', 'no'),
+(127, 2, '2019-03-08 09:30:36', 'no'),
+(128, 5, '2019-03-08 09:39:36', 'no'),
+(129, 6, '2019-03-08 09:42:43', 'no'),
+(130, 3, '2019-03-08 09:43:40', 'no'),
+(131, 5, '2019-03-08 09:45:18', 'no'),
+(132, 2, '2019-03-08 09:54:03', 'no'),
+(133, 3, '2019-03-08 09:56:08', 'no'),
+(134, 3, '2019-03-08 14:43:34', 'no'),
+(135, 3, '2019-03-08 14:54:36', 'no'),
+(136, 3, '2019-03-08 23:06:59', 'no'),
+(137, 3, '2019-03-08 23:08:16', 'no'),
+(138, 2, '2019-03-08 23:09:13', 'no'),
+(139, 5, '2019-03-08 23:18:11', 'no'),
+(140, 3, '2019-03-08 23:36:49', 'no'),
+(141, 3, '2019-03-09 00:19:21', 'no'),
+(142, 6, '2019-03-09 00:19:40', 'no'),
+(143, 2, '2019-03-09 00:25:37', 'no'),
+(144, 2, '2019-03-09 00:50:41', 'no'),
+(145, 5, '2019-03-09 01:25:29', 'no'),
+(146, 3, '2019-03-09 02:08:27', 'no');
 
 -- --------------------------------------------------------
 
@@ -338,8 +337,8 @@ CREATE TABLE `payments` (
 INSERT INTO `payments` (`paymentID`, `user_id`, `statementID`, `status`) VALUES
 (10, '3', '5', 'Paid'),
 (11, '8', '5', 'Paid'),
-(12, '1', '7', 'Paid'),
-(13, '1', '8', 'Paid');
+(12, '3', '8', 'Paid'),
+(13, '3', '10', 'Paid');
 
 -- --------------------------------------------------------
 
@@ -368,7 +367,8 @@ INSERT INTO `statement` (`statementID`, `month`, `security`, `garbage`, `infrast
 (5, '2018-06', '1000', '1000', '2000', '4000', '40'),
 (6, '2018-10', '1000', '500', '1000', '2500', '25'),
 (7, '2018-11', '6678', '5789', '8867', '21334', '213.34'),
-(8, '2018-12', '5000', '439', '3498', '8937', '89.37');
+(8, '2018-12', '2000', '2000', '2000', '6000', '60'),
+(10, '2019-01', '900', '2980', '2130', '6010', '60.1');
 
 -- --------------------------------------------------------
 
@@ -395,9 +395,7 @@ INSERT INTO `tbl_comment` (`comment_id`, `parent_comment_id`, `comment`, `commen
 (4, 3, 'Its OK', 'Peter', '2018-10-24 21:48:33'),
 (5, 4, 'i am the groot', 'cosmas', '2018-10-24 21:48:43'),
 (6, 0, 'I really love this site', 'Michael', '2018-10-25 05:01:45'),
-(7, 0, 'hi\r\n\r\n\r\n\r\n\r\n\r\n\r\n', 'muj', '2018-10-25 09:06:48'),
-(8, 0, 'I need Time', 'Peter', '2018-11-02 06:44:46'),
-(9, 8, 'Why?', 'Cosmas', '2018-11-02 06:44:58');
+(7, 0, 'hi\r\n\r\n\r\n\r\n\r\n\r\n\r\n', 'muj', '2018-10-25 09:06:48');
 
 -- --------------------------------------------------------
 
@@ -420,16 +418,18 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `houseNumber`, `email`, `phoneNo`, `Position`, `password`) VALUES
-(1, 'Cosmas Nyairo', '4A', 'nyairocosmas@gmail.com', '254799344215', 'Resident', '$2y$10$aqmtYAYwAT7CUSQ43UosjOOeRGkD9AtylAJbchm6vzCF01YKHu2Ku'),
-(2, 'Mary Njenga', '2A', 'mary.njenga@gmail.com', '254722904502', 'Chairperson', '$2y$10$hG0t0MRpByc7Y8MOAT19d.AleXZJQ/Qty9ZPzdRN5TvZzxLtQufku'),
-(3, 'Allan Vikiru', '4A', 'vikiruallan12@gmail.com', '254735696067', 'Resident', '$2y$10$jd6f9NIpbXGL9Jq6pNtmCe3nbxMAVXlofWnuPvt69.dbm3wnRxCKq'),
-(4, 'Susan Orina', '1A', 'susan.orina@gmail.com', '254722904502', 'Treasurer', '$2y$10$of2rS7Ga09PEuAW6cHZmqe8UzwU/FQ2QUWOXWpmhy9OtUCZHsL5sC'),
-(5, 'Moses Mumo', '-', 'mmumo@gmail.com', '254735098651', 'Administrator', '$2y$10$irxmB9jrnmh30ElEhZDsduUFCbhwVWGM4SKCNTD2IUTvYrpNpR//S'),
-(6, 'Tom Rotich', '5A', 'trotich@gmail.com', '254735696067', 'Secretary', '$2y$10$emgyQrZuLkUaoGzKVNxdY.XLi.aQos691Q2yAEqlAiJV1uoUBbW56'),
-(7, 'Sarah Mukhonza', '6A', 'smukhonza@gmail.com', '254735124684', 'Resident', '$2y$10$KbSItiFEsYFR.chQbRsZuu.6Dh5OschMLrqFRf9pntI8iTRCNPnyy'),
-(8, 'Peter Maina', '7B', 'pmaina@gmail.com', '254723589134', 'Resident', '$2y$10$vCQuzcDMs0U5xfhgYhBCiu5/2.fyK90spWjBRRs2r3aVh6HD5OJAq'),
-(9, 'Josephine', '11C', 'josephinem@gmail.com', '254727848914', 'Resident', '$2y$10$hnjHDgZmqt0Qc6JIFDKiye0rY8XDbljlPz9wdFeOY77teqkJHm996'),
-(10, 'Michael', '4B', 'mnyairo@gmail.com', '254862349349', 'Resident', '$2y$10$dIjuhCWCqzUkIEbOfzcLSOhLEuI4KBNHs6.iyTAf7FpTnW9QvKv.m');
+(1, 'Cosmas Nyairo', 'E2', 'nyairocosmas@gmail.com', '+254799344215', 'Resident', '$2y$10$aqmtYAYwAT7CUSQ43UosjOOeRGkD9AtylAJbchm6vzCF01YKHu2Ku'),
+(2, 'Mary Njenga', '2A', 'mary.njenga@gmail.com', '+254722904502', 'Chairperson', '$2y$10$hG0t0MRpByc7Y8MOAT19d.AleXZJQ/Qty9ZPzdRN5TvZzxLtQufku'),
+(3, 'Allan Vikiru', 'C3', 'vikiruallan12@gmail.com', '+254735696067', 'Resident', '$2y$10$jd6f9NIpbXGL9Jq6pNtmCe3nbxMAVXlofWnuPvt69.dbm3wnRxCKq'),
+(4, 'Susan Orina', 'B2', 'susan.orina@gmail.com', '+254722904502', 'Resident', '$2y$10$of2rS7Ga09PEuAW6cHZmqe8UzwU/FQ2QUWOXWpmhy9OtUCZHsL5sC'),
+(5, 'Moses Mumo', '-', 'mmumo@gmail.com', '+254735098651', 'Administrator', '$2y$10$irxmB9jrnmh30ElEhZDsduUFCbhwVWGM4SKCNTD2IUTvYrpNpR//S'),
+(6, 'Tom Rotich', 'A5', 'trotich@gmail.com', '+254735696067', 'Resident', '$2y$10$emgyQrZuLkUaoGzKVNxdY.XLi.aQos691Q2yAEqlAiJV1uoUBbW56'),
+(7, 'Sarah Mukhonza', 'A6', 'smukhonza@gmail.com', '+254735124684', 'Resident', '$2y$10$KbSItiFEsYFR.chQbRsZuu.6Dh5OschMLrqFRf9pntI8iTRCNPnyy'),
+(8, 'Peter Maina', 'B7', 'pmaina@gmail.com', '+254723589134', 'Resident', '$2y$10$vCQuzcDMs0U5xfhgYhBCiu5/2.fyK90spWjBRRs2r3aVh6HD5OJAq'),
+(9, 'Josephine', 'A1', 'josephinem@gmail.com', '+254727848914', 'Resident', '$2y$10$hnjHDgZmqt0Qc6JIFDKiye0rY8XDbljlPz9wdFeOY77teqkJHm996'),
+(19, 'Regina', 'B2', 'regina@gmail.com', '+254723465139', 'Resident', '5785dbb00c497a3a319917382647d8b4'),
+(20, 'Laura Neri', 'B2', 'lneri@gmail.com', '+254725467920', 'Resident', '5785dbb00c497a3a319917382647d8b4'),
+(22, 'Kim Manha', 'B7', 'jmanha@gmail.com', '+254732903873', 'Resident', '5785dbb00c497a3a319917382647d8b4');
 
 --
 -- Indexes for dumped tables
@@ -448,12 +448,6 @@ ALTER TABLE `chat_message`
   ADD PRIMARY KEY (`chat_message_id`);
 
 --
--- Indexes for table `estate_forum`
---
-ALTER TABLE `estate_forum`
-  ADD PRIMARY KEY (`chat_message_id`);
-
---
 -- Indexes for table `general_announcement`
 --
 ALTER TABLE `general_announcement`
@@ -464,12 +458,6 @@ ALTER TABLE `general_announcement`
 --
 ALTER TABLE `login_details`
   ADD PRIMARY KEY (`login_details_id`);
-
---
--- Indexes for table `new_residents`
---
-ALTER TABLE `new_residents`
-  ADD PRIMARY KEY (`pendingID`);
 
 --
 -- Indexes for table `payments`
@@ -503,32 +491,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin_requests`
 --
 ALTER TABLE `admin_requests`
-  MODIFY `requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `chat_message`
 --
 ALTER TABLE `chat_message`
-  MODIFY `chat_message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
---
--- AUTO_INCREMENT for table `estate_forum`
---
-ALTER TABLE `estate_forum`
-  MODIFY `chat_message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT for table `general_announcement`
---
-ALTER TABLE `general_announcement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `chat_message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `login_details`
 --
 ALTER TABLE `login_details`
-  MODIFY `login_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
---
--- AUTO_INCREMENT for table `new_residents`
---
-ALTER TABLE `new_residents`
-  MODIFY `pendingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `login_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
 --
 -- AUTO_INCREMENT for table `payments`
 --
@@ -538,18 +511,17 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `statement`
 --
 ALTER TABLE `statement`
-  MODIFY `statementID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `statementID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tbl_comment`
 --
 ALTER TABLE `tbl_comment`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;COMMIT;
-
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
