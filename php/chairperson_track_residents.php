@@ -6,10 +6,6 @@ $username = "root";
 $password = "";
 $dbname = "faida_estate";
 
-if( $_SESSION['Position'] != 'Chairperson')
-{
-  header("location:login.php");
-}
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -20,7 +16,7 @@ if ($conn->connect_error) {
 $sql = "SELECT * FROM users WHERE position = 'Resident'";
 $result = $conn->query($sql);
 
-$query = "SELECT * FROM new_residents";
+$query = "SELECT * FROM users WHERE position = 'Not Verified'";
 $result1 = $conn->query($query);
 
      
@@ -103,13 +99,13 @@ $result1 = $conn->query($query);
                     </li>
                     <li>
                         <a href="chairchat.php">
-                            <span><i class="fa fa-envelope"></i></span>
+                            <span><i class="fa fa-comment-alt"></i></span>
                             <span>Chat</span>
                         </a>
                     </li>
                     <li>
                         <a href="chairannouncements.php">
-                            <span><i class="fa fa-bell"></i></span>
+                            <span><i class="fa fa-envelope"></i></span>
                             <span>Announcements</span>
                         </a>
                     </li>
@@ -139,8 +135,6 @@ $result1 = $conn->query($query);
       <div class="title">
         Faida Estate Residents
       </div>
-    
-          
         <div class="col-md-12">
             <div class="residents_content"></div>
         </div>
@@ -151,11 +145,10 @@ $result1 = $conn->query($query);
             <div class="new_residents_content"></div>
         </div>
     
-     
-
       </div>
     
-   <!-- Modal - Resident Details -->
+   <!-- Modals
+    - Resident Details
 <div class="modal fade" id="user_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -198,9 +191,9 @@ $result1 = $conn->query($query);
         </div>
     </div>
 </div>
-<!-- // Modal -->
 
- <!-- Modal - Contact Pending Residents Details -->
+
+  - Contact Pending Residents Details 
 <div class="modal fade" id="contact_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -242,8 +235,9 @@ $result1 = $conn->query($query);
             </div>
         </div>
     </div>
-</div>
-<!-- // Modal -->
+</div> 
+
+ //Modals -->
 <script type="text/javascript" src= "../javascript/resident_script.js"> </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
 <!-- Latest compiled and minified CSS -->

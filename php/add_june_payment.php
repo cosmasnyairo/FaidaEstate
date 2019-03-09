@@ -4,7 +4,7 @@
      $id = $_SESSION['login_id'];
 
      $sql = "SELECT * FROM users WHERE user_id ='$id'";
-     $query = "SELECT * FROM statement WHERE month ='2018-06'";
+     $query = "SELECT * FROM statement WHERE month ='2019-06'";
      
      $result = mysqli_query($db, $sql);
      $result1 = mysqli_query($db, $query);

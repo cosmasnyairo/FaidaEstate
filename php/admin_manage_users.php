@@ -1,23 +1,18 @@
 <?php
 session_start();
 
-
-
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "faida_estate";
-if( $_SESSION['Position'] != 'Administrator')
-{
-  header("location:login.php");
-}
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$sql = "SELECT * FROM new_residents";
+$sql = "SELECT * FROM users";
 
 $result = $conn->query($sql);
 $number = 1;
@@ -87,9 +82,7 @@ $number = 1;
         <div class="main-content">
             <div class="title">
                 All User Details
-                <div class="pull-right">
-                <button class="btn btn-link" data-toggle="modal" data-target="#pending_residents_modal">View Pending Residents
-                </button>    
+                <div class="pull-right">    
                 <button class="btn btn-success" data-toggle="modal" data-target="#add_new_record_modal">Add New User</button>
             </div>
         </div>
@@ -109,7 +102,6 @@ $number = 1;
 <div class="modal fade" id="add_new_record_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="" method="post">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 <h4 class="modal-title" id="myModalLabel">Add New Record</h4>
@@ -123,17 +115,17 @@ $number = 1;
               
                  <div class="form-group">
                     <label for="name">Position</label>
-                    <input type="text" id="position" placeholder="Position" class="form-control"/>
+                    <input type="text" id="position" placeholder="eg. Resident" class="form-control"/>
                 </div>
 
                 <div class="form-group">
                     <label for="houseNumber">House Number</label>
-                    <input type="text" id="houseNumber" placeholder="House Number" class="form-control"/>
+                    <input type="text" id="houseNumber" placeholder="eg. A1" class="form-control"/>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="text" name="nemail" id="email" placeholder="Email Address" class="form-control"/>
+                    <input type="text" id="email" placeholder="an.other@email.com" class="form-control"/>
                 </div>
 
                 <div class="form-group">
@@ -143,66 +135,16 @@ $number = 1;
 
                 <div class="form-group">
                     <label for="password">Default Password</label>
-                    <input type="text" name="npassword" id="password" placeholder="_House Number-First Name_" class="form-control"/>
+                    <input type="password" id="password" placeholder="***********" class="form-control"/>
                 </div>
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" id="emailbtn"class="btn btn-secondary" onclick="sendPassword()">Email Password</button>
-                <button type="button" id="userbtn" class="btn btn-primary" onclick="addRecord()" disabled>Add User</button>
-            </div>
-        </form>
-        </div>
-    </div>
-</div>
-<!-- // Modal -->
-
-<!-- Modal - View Pending Residents details -->
-<div class="modal fade" id="pending_residents_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">Pending Residents</h4>
-            </div>
-            <div class="modal-body">
-            <?php  
-                 while($row = mysqli_fetch_array($result))  
-                               {  
-                               ?>  
-              
-                          <table class="table table-bordered table-striped">
-                        <tr>
-                            <th>No.</th>
-                            <th>Name</th>
-                            <th>House Number</th>
-                            <th>Email Address</th>
-                            <th>Phone Number</th>
-                            <th>Status</th>
-                        </tr>';
-                             
-                               <tr> 
-                                    <td><?php echo $number ; ?></td> 
-                                    <td><?php echo $row["name"]; ?></td>  
-                                    <td><?php echo $row["houseNumber"]; ?></td>
-                                    <td><?php echo $row["email"]; ?></td>
-                                    <td><?php echo $row["phoneNo"]; ?></td>
-                                    <td><?php echo $row["status"]; ?></td>
-                               </tr>  
-                               <?php  
-                                $number++; }
-                               ?>  
-                          </table>   
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="addRecord()">Add User</button>
             </div>
         </div>
     </div>
-
-</div>
 </div>
 <!-- // Modal -->
 
@@ -240,10 +182,6 @@ $number = 1;
                     <label for="phoneNo">Phone Number</label>
                     <input type="text" id="update_phoneNo" placeholder="254XXXXXXXXX" class="form-control"/>
                 </div>
-
-
-               
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -260,11 +198,10 @@ $number = 1;
  <!-- Modal - Contact Resident  -->
 <div class="modal fade" id="user_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
-       <form method="post" action="../mail/cosmas.php">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title" id="myModalLabel">Contact Resident</h4>
+                <h4 class="modal-title" id="myModalLabel">Contact User</h4>
             </div>
             <div class="modal-body">
 
@@ -272,17 +209,17 @@ $number = 1;
 
                 <div class="form-group">
                     <label for="name">Full Name</label>
-                    <input type="text" id="user-name" placeholder="Full Name" class="form-control"/>
+                    <input type="text" id="contact_username" placeholder="Full Name" class="form-control"/>
                 </div>
 
                 <div class="form-group">
                     <label for="houseNumber">House Number</label>
-                    <input type="text" id="house-Number" placeholder="House Number" class="form-control"/>
+                    <input type="text" id="contact_houseNumber" placeholder="House Number" class="form-control"/>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="text" id="e-mail" name="email" placeholder="Email Address" class="form-control"/>
+                    <input type="text" id="contact_email" placeholder="Email Address" class="form-control"/>
                 </div>
 
                  <div class="form-group">
@@ -297,11 +234,10 @@ $number = 1;
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id= "submitBtn" onclick="submitContactForm()">Email</button>
+                <button type="button" class="btn btn-primary" id= submitBtn onclick="submitContactForm()">Email</button>
                 <input type="hidden" id="hidden_userid">
             </div>
         </div>
-    </form>
     </div>
 </div>
 
@@ -333,7 +269,7 @@ function submitContactForm(){
         return false;
     }
     else{
-         $.post("../mail/contact.php", {
+         $.post("../mail/sendEmail.php", {
             subject:subject,
             email: email,
             message: message
@@ -343,36 +279,13 @@ function submitContactForm(){
                     $('#subject').val('');
                     $('#message').val('');
                     $('.statusMsg').html('<span style="color:green;">Your Message has been Sent.</p>');
-                    alert('Message sent!');
                 }else{
-                    alert('Message sent!');
-                     location.href = "../php/admin_manage_users.php";
+                    $('.statusMsg').html('<span style="color:red;">Some problem occurred, please try again.</span>');
                 }
         }
     );
 }
  }
-
-function sendPassword() {
-    // get values
-
-    var username = $("#username").val();
-    var email = $("#email").val();
-    var password = $("#password").val();
-
-    $.post("../mail/sendpassword.php", {
-       
-        username: username,
-        email: email,
-        password: password
-
-    }, function (data) {
-        alert('Password sent!');
-        document.getElementById("userbtn").disabled = false;
-
-    });
-}
-
 var logout = document.getElementById('logout');
 logout.addEventListener('click', function() {
   if (confirm("Are you sure you want to log out?")) {
@@ -382,6 +295,6 @@ logout.addEventListener('click', function() {
 }
 });
 </script>
-
+ 
 </body>
 </html>

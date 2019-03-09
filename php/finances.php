@@ -13,45 +13,79 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql1 = "SELECT * FROM statement WHERE month = '2018-06'"; 
+$sql1 = "SELECT * FROM statement WHERE month = '2019-01'"; 
 $result1 = $conn->query($sql1);
  if(!$result1) {
      echo $conn->error;
   }
-$sql2 = "SELECT * FROM statement WHERE month = '2018-07'"; 
+  
+$sql2 = "SELECT * FROM statement WHERE month = '2019-02'"; 
 $result2 = $conn->query($sql2);
  if(!$result2) {
      echo $conn->error;
   }
   
-$sql3 = "SELECT * FROM statement WHERE month = '2018-08'"; 
+$sql3 = "SELECT * FROM statement WHERE month = '2019-03'"; 
 $result3 = $conn->query($sql3);
  if(!$result3) {
      echo $conn->error;
   }
 
-$sql4 = "SELECT * FROM statement WHERE month = '2018-09'"; 
+$sql4 = "SELECT * FROM statement WHERE month = '2019-04'"; 
 $result4 = $conn->query($sql4);
  if(!$result4) {
      echo $conn->error;
   }
-$sql5 = "SELECT * FROM statement WHERE month = '2018-10'"; 
+
+$sql5 = "SELECT * FROM statement WHERE month = '2019-05'"; 
 $result5 = $conn->query($sql5);
  if(!$result5) {
      echo $conn->error;
   }
-$sql6 = "SELECT * FROM statement WHERE month = '2018-11'"; 
+
+$sql6 = "SELECT * FROM statement WHERE month = '2019-06'"; 
 $result6 = $conn->query($sql6);
  if(!$result6) {
      echo $conn->error;
   }
-  $sql7 = "SELECT * FROM statement WHERE month = '2018-12'"; 
+
+$sql7 = "SELECT * FROM statement WHERE month = '2019-07'"; 
 $result7 = $conn->query($sql7);
  if(!$result7) {
      echo $conn->error;
   }
- 
+
+$sql8 = "SELECT * FROM statement WHERE month = '2019-08'"; 
+$result8 = $conn->query($sql8);
+ if(!$result8) {
+     echo $conn->error;
+  }
+  
+$sql9 = "SELECT * FROM statement WHERE month = '2019-09'"; 
+$result9 = $conn->query($sql9);
+ if(!$result9) {
+     echo $conn->error;
+  }
+
+$sql10 = "SELECT * FROM statement WHERE month = '2019-10'"; 
+$result10 = $conn->query($sql10);
+ if(!$result10) {
+     echo $conn->error;
+  }
+
+$sql11 = "SELECT * FROM statement WHERE month = '2019-11'"; 
+$result11 = $conn->query($sql11);
+ if(!$result11) {
+     echo $conn->error;
+  }
+
+$sql12 = "SELECT * FROM statement WHERE month = '2019-12'"; 
+$result12 = $conn->query($sql12);
+ if(!$result12) {
+     echo $conn->error;
+  }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,19 +102,19 @@ $result7 = $conn->query($sql7);
 	<script src="../javascript/main.js"></script>
 <style>
 .accordion {
-    border-top-left-radius: 6px;
+  border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
 	background-color: #eef1f7;
 	color: #617085;
 	font-weight: 600;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
-    transition: 0.4s;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
 }
 
 .accordion:active, .accordion:hover {
@@ -132,7 +166,7 @@ $result7 = $conn->query($sql7);
             <li>
               <a href="userannouncements.php">
 
-                <span><i class="fa fa-bell"></i></span>
+                <span><i class="fa fa-envelope"></i></span>
                 <span>Announcements</span>
               </a>
             </li>
@@ -163,18 +197,18 @@ $result7 = $conn->query($sql7);
 			</nav>
 		</div>
         
-		<div class="main-content">
+<div class="main-content">
 			<div class="title">
-				2018 Statements
+				2019 Invoices
 			</div>
-                <button class="accordion">June</button>
+  <button class="accordion">January</button>
             <div class="panel">
            <div class="login-page">
            <div class="form">
                 <form class="login-form" action="#">
-      <p class="headers"> June 2018 Statement </p>
+      <p class="headers"> January 2019 Invoice </p>
       <?php if ($result1 && $result1->num_rows > 0) { // output data of each row
-    while($row = $result1->fetch_assoc()) { ?>
+  while($row = $result1->fetch_assoc()) { ?>
       <p class="message" align="left">Security:</p> <p class="message" align="right"> 
        KES <?php echo $row['security']; ?> </p> <br/> 
       <p class="message" align="left">Garbage Collection:</p> <p class="message" align="right"> 
@@ -184,23 +218,23 @@ $result7 = $conn->query($sql7);
       <p class="message" align="left">Total:</p> <p class="message" align="right"> 
        KES <?php echo $row['total_kes']; ?> (USD <?php echo $row['total_usd']; ?>) </p> <br/>
 </form>
- <div id="paypal-button1"></div>
+       <div id="paypal-button1"></div>
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
-<script>
-  paypal.Button.render({
-    // Configure environment
-    env: 'sandbox',
-    client: {
+ <script>
+      paypal.Button.render({
+      // Configure environment
+      env: 'sandbox',
+      client: {
       sandbox: 'AbA_jM24o_SXyUpFUhTHv3q6xgZlzQWLulDi0M659xhaOHr3oGg1YpzG1zoMFbUBZggaFWwylvr5XL0v',
       production: '',
-    },
-    // Customize button (optional)
-    locale: 'en_US',
-    style: {
-    color: 'blue',   // 'gold, 'blue', 'silver', 'black'
-    size:  'responsive', // 'medium', 'small', 'large', 'responsive'
-    shape: 'rect'    // 'rect', 'pill'
-    },
+      },
+       // Customize button (optional)
+     locale: 'en_US',
+     style: {
+     color: 'blue',   // 'gold, 'blue', 'silver', 'black'
+     size:  'responsive', // 'medium', 'small', 'large', 'responsive'
+     shape: 'rect'    // 'rect', 'pill'
+     },
     // Set up a payment
     payment: function(data, actions) {
       return actions.payment.create({
@@ -217,7 +251,7 @@ $result7 = $conn->query($sql7);
       return actions.payment.execute().then(function() {
         // Show a confirmation message to the buyer
         window.alert('Your payment has been recieved!');
-        location.href = "../php/add_june_payment.php";
+        location.href = "../php/add_jan_payment.php";
         
         
         
@@ -225,7 +259,6 @@ $result7 = $conn->query($sql7);
       });
     }
   }, '#paypal-button1');
-
 </script>
     
         <?php } }else {
@@ -238,12 +271,12 @@ $result7 = $conn->query($sql7);
              </div>
 	
              
-		 <button class="accordion">July</button>
+		 <button class="accordion">February</button>
             <div class="panel">
            <div class="login-page">
            <div class="form">
                 <form class="login-form" action="#">
-      <p class="headers"> July 2018 Statement </p>
+      <p class="headers"> February 2019 Invoice </p>
       <?php if ($result2 && $result2->num_rows > 0) { // output data of each row
     while($row = $result2->fetch_assoc()) { ?>
       <p class="message" align="left">Security:</p> <p class="message" align="right"> 
@@ -288,7 +321,7 @@ $result7 = $conn->query($sql7);
       return actions.payment.execute().then(function() {
         // Show a confirmation message to the buyer
         window.alert('Your payment has been recieved!');
-        location.href = "../php/add_july_payment.php";
+        location.href = "../php/add_feb_payment.php";
        
         
 
@@ -307,14 +340,14 @@ $result7 = $conn->query($sql7);
                </div>
                  </div>
 
-      <button class="accordion">August</button>
+      <button class="accordion">March</button>
             <div class="panel">
             <div class="login-page">
            <div class="form">
-          <form class="login-form" action="#">
-       <p class="headers"> August 2018 Statement </p>
+                <form class="login-form" action="#">
+       <p class="headers"> March 2019 Invoice </p>
       <?php if ($result3 && $result3->num_rows > 0) { // output data of each row
-      while($row = $result3->fetch_assoc()) { ?>
+    while($row = $result3->fetch_assoc()) { ?>
       <p class="message" align="left">Security:</p> <p class="message" align="right"> 
        KES <?php echo $row['security']; ?> </p> <br/> 
       <p class="message" align="left">Garbage Collection:</p> <p class="message" align="right"> 
@@ -324,7 +357,7 @@ $result7 = $conn->query($sql7);
       <p class="message" align="left">Total:</p> <p class="message" align="right"> 
        KES <?php echo $row['total_kes']; ?> (USD <?php echo $row['total_usd']; ?>)</p> <br/>
 </form>
-  <div id="paypal-button3"></div>
+       <div id="paypal-button3"></div>
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 <script>
   paypal.Button.render({
@@ -357,7 +390,7 @@ $result7 = $conn->query($sql7);
       return actions.payment.execute().then(function() {
         // Show a confirmation message to the buyer
         window.alert('Your payment has been recieved!');
-        location.href = "../php/add_august_payment.php";
+        location.href = "../php/add_march_payment.php";
       
         
 
@@ -373,17 +406,17 @@ $result7 = $conn->query($sql7);
 	
       ?> 
              </div>
-          </div>
+             </div>
              </div> 
              
-              <button class="accordion">September</button>
+<button class="accordion">April</button>
             <div class="panel">
             <div class="login-page">
            <div class="form">
                <form class="login-form" action="#">
-       <p class="headers"> September 2018 Statement </p>
+       <p class="headers"> April 2019 Invoice </p>
       <?php if ($result4 && $result4->num_rows > 0) { // output data of each row
-      while($row = $result4->fetch_assoc()) { ?>
+    while($row = $result4->fetch_assoc()) { ?>
       <p class="message" align="left">Security:</p> <p class="message" align="right"> 
        KES <?php echo $row['security']; ?> </p> <br/> 
       <p class="message" align="left">Garbage Collection:</p> <p class="message" align="right"> 
@@ -426,7 +459,7 @@ $result7 = $conn->query($sql7);
       return actions.payment.execute().then(function() {
         // Show a confirmation message to the buyer
         window.alert('Your payment has been recieved!');
-        location.href = "../php/add_sept_payment.php";
+        location.href = "../php/add_april_payment.php";
         
         
 
@@ -444,17 +477,17 @@ $result7 = $conn->query($sql7);
 	
       ?> 
              </div>
-          </div>
+             </div>
              </div> 
              
-            <button class="accordion">October</button>
+<button class="accordion">May</button>
             <div class="panel">
             <div class="login-page">
            <div class="form">
                <form class="login-form" action="#">
-       <p class="headers"> October 2018 Statement </p>
+       <p class="headers"> May 2019 Invoice </p>
       <?php if ($result5 && $result5->num_rows > 0) { // output data of each row
-      while($row = $result5->fetch_assoc()) { ?>
+    while($row = $result5->fetch_assoc()) { ?>
       <p class="message" align="left">Security:</p> <p class="message" align="right"> 
        KES <?php echo $row['security']; ?> </p> <br/> 
       <p class="message" align="left">Garbage Collection:</p> <p class="message" align="right"> 
@@ -497,7 +530,7 @@ $result7 = $conn->query($sql7);
       return actions.payment.execute().then(function() {
         // Show a confirmation message to the buyer
         window.alert('Your payment has been recieved!');
-        location.href = "../php/add_october_payment.php";
+        location.href = "../php/add_may_payment.php";
         
         
 
@@ -514,15 +547,15 @@ $result7 = $conn->query($sql7);
 	
       ?> 
              </div>
-          </div>
+             </div>
              </div> 
              
-             <button class="accordion">November</button>
+<button class="accordion">June</button>
             <div class="panel">
              <div class="login-page">
            <div class="form">
         <form class="login-form" action="#">
-     <p class="headers"> November 2018 Statement </p>
+     <p class="headers"> June 2019 Invoice </p>
       <?php if ($result6 && $result6->num_rows > 0) { // output data of each row
     while($row = $result6->fetch_assoc()) { ?>
       <p class="message" align="left">Security:</p> <p class="message" align="right"> 
@@ -535,6 +568,146 @@ $result7 = $conn->query($sql7);
        KES <?php echo $row['total_kes']; ?> (USD <?php echo $row['total_usd']; ?>) </p> <br/>
 </form>
        <div id="paypal-button6"></div>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script>
+  paypal.Button.render({
+    // Configure environment
+    env: 'sandbox',
+    client: {
+      sandbox: 'AbA_jM24o_SXyUpFUhTHv3q6xgZlzQWLulDi0M659xhaOHr3oGg1YpzG1zoMFbUBZggaFWwylvr5XL0v',
+      production: '',
+    },
+    // Customize button (optional)
+    locale: 'en_US',
+    style: {
+    color: 'blue',   // 'gold, 'blue', 'silver', 'black'
+    size:  'responsive', // 'medium', 'small', 'large', 'responsive'
+    shape: 'rect'    // 'rect', 'pill'
+    },
+    // Set up a payment
+    
+     payment: function(data, actions) {
+      return actions.payment.create({
+        transactions: [{
+          amount: {
+            total: '60',
+            currency: 'USD'
+          }
+        }]
+      });
+    },
+    // Execute the payment
+    onAuthorize: function(data, actions) {
+      return actions.payment.execute().then(function() {
+        // Show a confirmation message to the buyer
+        window.alert('Your payment has been recieved!');
+        location.href = "../php/add_june_payment.php";
+        
+        
+
+      });
+    }
+  }, '#paypal-button6');
+
+</script>
+
+        <?php } }else {
+        echo "No receipt yet.";
+      }
+	 
+      ?> 
+             </div>
+             </div>
+             </div> 
+
+<!--
+<button class="accordion">July</button>
+            <div class="panel">
+            <div class="login-page">
+           <div class="form">
+  <form class="login-form" action="#">
+       <p class="headers"> July 2019 Invoice </p>
+      <?php if ($result7 && $result7->num_rows > 0) { // output data of each row
+      while($row = $result7->fetch_assoc()) { ?>
+      <p class="message" align="left">Security:</p> <p class="message" align="right"> 
+       KES <?php echo $row['security']; ?> </p> <br/> 
+      <p class="message" align="left">Garbage Collection:</p> <p class="message" align="right"> 
+       KES <?php echo $row['garbage']; ?> </p> <br/>
+      <p class="message" align="left">Infrastructure Maintenance:</p> <p class="message" align="right"> 
+       KES <?php echo $row['infrastructure']; ?> </p> <br/>
+      <p class="message" align="left">Total:</p> <p class="message" align="right"> 
+       KES <?php echo $row['total_kes']; ?> (USD <?php echo $row['total_usd']; ?>)</p> <br/>
+  </form>
+  <div id="paypal-button7"></div>
+  <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+  <script>
+  paypal.Button.render({
+    // Configure environment
+    env: 'sandbox',
+    client: {
+      sandbox: 'AbA_jM24o_SXyUpFUhTHv3q6xgZlzQWLulDi0M659xhaOHr3oGg1YpzG1zoMFbUBZggaFWwylvr5XL0v',
+      production: '',
+    },
+    // Customize button (optional)
+    locale: 'en_US',
+    style: {
+    color: 'blue',   // 'gold, 'blue', 'silver', 'black'
+    size:  'responsive', // 'medium', 'small', 'large', 'responsive'
+    shape: 'rect'    // 'rect', 'pill'
+    },
+    // Set up a payment
+    payment: function(data, actions) {
+      return actions.payment.create({
+        transactions: [{
+          amount: {
+            total: '60',
+            currency: 'USD'
+          }
+        }]
+      });
+    },
+    // Execute the payment
+    onAuthorize: function(data, actions) {
+      return actions.payment.execute().then(function() {
+        // Show a confirmation message to the buyer
+        window.alert('Your payment has been recieved!');
+        location.href = "../php/add_july_payment.php";
+      
+        
+
+      });
+    }
+  }, '#paypal-button7');
+
+</script>
+
+        <?php } }else {
+        echo "No receipt yet.";
+      }
+  
+      ?> 
+             </div>
+          </div>
+             </div> 
+
+             <button class="accordion">August</button>
+            <div class="panel">
+            <div class="login-page">
+           <div class="form">
+          <form class="login-form" action="#">
+       <p class="headers"> August 2019 Invoice </p>
+      <?php if ($result8 && $result8->num_rows > 0) { // output data of each row
+      while($row = $result8->fetch_assoc()) { ?>
+      <p class="message" align="left">Security:</p> <p class="message" align="right"> 
+       KES <?php echo $row['security']; ?> </p> <br/> 
+      <p class="message" align="left">Garbage Collection:</p> <p class="message" align="right"> 
+       KES <?php echo $row['garbage']; ?> </p> <br/>
+      <p class="message" align="left">Infrastructure Maintenance:</p> <p class="message" align="right"> 
+       KES <?php echo $row['infrastructure']; ?> </p> <br/>
+      <p class="message" align="left">Total:</p> <p class="message" align="right"> 
+       KES <?php echo $row['total_kes']; ?> (USD <?php echo $row['total_usd']; ?>)</p> <br/>
+</form>
+  <div id="paypal-button8"></div>
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 <script>
   paypal.Button.render({
@@ -567,33 +740,33 @@ $result7 = $conn->query($sql7);
       return actions.payment.execute().then(function() {
         // Show a confirmation message to the buyer
         window.alert('Your payment has been recieved!');
-        location.href = "../php/add_november_payment.php";
-        
+        location.href = "../php/add_august_payment.php";
+      
         
 
       });
     }
-  }, '#paypal-button6');
+  }, '#paypal-button8');
 
 </script>
 
         <?php } }else {
         echo "No receipt yet.";
       }
-	  $conn->close();
+  
       ?> 
              </div>
           </div>
-             </div>  
+             </div> 
 
-			<button class="accordion">December</button>
+             <button class="accordion">September</button>
             <div class="panel">
-             <div class="login-page">
+            <div class="login-page">
            <div class="form">
-        <form class="login-form" action="#">
-     <p class="headers"> December 2018 Statement </p>
-      <?php if ($result7 && $result7->num_rows > 0) { // output data of each row
-    while($row = $result7->fetch_assoc()) { ?>
+          <form class="login-form" action="#">
+       <p class="headers"> September 2019 Invoice </p>
+      <?php if ($result9 && $result9->num_rows > 0) { // output data of each row
+      while($row = $result9->fetch_assoc()) { ?>
       <p class="message" align="left">Security:</p> <p class="message" align="right"> 
        KES <?php echo $row['security']; ?> </p> <br/> 
       <p class="message" align="left">Garbage Collection:</p> <p class="message" align="right"> 
@@ -601,9 +774,214 @@ $result7 = $conn->query($sql7);
       <p class="message" align="left">Infrastructure Maintenance:</p> <p class="message" align="right"> 
        KES <?php echo $row['infrastructure']; ?> </p> <br/>
       <p class="message" align="left">Total:</p> <p class="message" align="right"> 
-       KES <?php echo $row['total_kes']; ?> (USD <?php echo $row['total_usd']; ?>) </p> <br/>
+       KES <?php echo $row['total_kes']; ?> (USD <?php echo $row['total_usd']; ?>)</p> <br/>
 </form>
-       <div id="paypal-button7"></div>
+  <div id="paypal-button9"></div>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script>
+  paypal.Button.render({
+    // Configure environment
+    env: 'sandbox',
+    client: {
+      sandbox: 'AbA_jM24o_SXyUpFUhTHv3q6xgZlzQWLulDi0M659xhaOHr3oGg1YpzG1zoMFbUBZggaFWwylvr5XL0v',
+      production: '',
+    },
+    // Customize button (optional)
+    locale: 'en_US',
+    style: {
+    color: 'blue',   // 'gold, 'blue', 'silver', 'black'
+    size:  'responsive', // 'medium', 'small', 'large', 'responsive'
+    shape: 'rect'    // 'rect', 'pill'
+    },
+    // Set up a payment
+    payment: function(data, actions) {
+      return actions.payment.create({
+        transactions: [{
+          amount: {
+            total: '60',
+            currency: 'USD'
+          }
+        }]
+      });
+    },
+    // Execute the payment
+    onAuthorize: function(data, actions) {
+      return actions.payment.execute().then(function() {
+        // Show a confirmation message to the buyer
+        window.alert('Your payment has been recieved!');
+        location.href = "../php/add_sept_payment.php";
+      
+        
+
+      });
+    }
+  }, '#paypal-button9');
+
+</script>
+
+        <?php } }else {
+        echo "No receipt yet.";
+      }
+  
+      ?> 
+             </div>
+          </div>
+             </div> 
+
+             <button class="accordion">October</button>
+            <div class="panel">
+            <div class="login-page">
+           <div class="form">
+          <form class="login-form" action="#">
+       <p class="headers"> October 2019 Invoice </p>
+      <?php if ($result10 && $result10->num_rows > 0) { // output data of each row
+      while($row = $result10->fetch_assoc()) { ?>
+      <p class="message" align="left">Security:</p> <p class="message" align="right"> 
+       KES <?php echo $row['security']; ?> </p> <br/> 
+      <p class="message" align="left">Garbage Collection:</p> <p class="message" align="right"> 
+       KES <?php echo $row['garbage']; ?> </p> <br/>
+      <p class="message" align="left">Infrastructure Maintenance:</p> <p class="message" align="right"> 
+       KES <?php echo $row['infrastructure']; ?> </p> <br/>
+      <p class="message" align="left">Total:</p> <p class="message" align="right"> 
+       KES <?php echo $row['total_kes']; ?> (USD <?php echo $row['total_usd']; ?>)</p> <br/>
+</form>
+  <div id="paypal-button10"></div>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script>
+  paypal.Button.render({
+    // Configure environment
+    env: 'sandbox',
+    client: {
+      sandbox: 'AbA_jM24o_SXyUpFUhTHv3q6xgZlzQWLulDi0M659xhaOHr3oGg1YpzG1zoMFbUBZggaFWwylvr5XL0v',
+      production: '',
+    },
+    // Customize button (optional)
+    locale: 'en_US',
+    style: {
+    color: 'blue',   // 'gold, 'blue', 'silver', 'black'
+    size:  'responsive', // 'medium', 'small', 'large', 'responsive'
+    shape: 'rect'    // 'rect', 'pill'
+    },
+    // Set up a payment
+    payment: function(data, actions) {
+      return actions.payment.create({
+        transactions: [{
+          amount: {
+            total: '60',
+            currency: 'USD'
+          }
+        }]
+      });
+    },
+    // Execute the payment
+    onAuthorize: function(data, actions) {
+      return actions.payment.execute().then(function() {
+        // Show a confirmation message to the buyer
+        window.alert('Your payment has been recieved!');
+        location.href = "../php/add_october_payment.php";
+      
+        
+
+      });
+    }
+  }, '#paypal-button10');
+
+</script>
+
+        <?php } }else {
+        echo "No receipt yet.";
+      }
+  
+      ?> 
+             </div>
+          </div>
+             </div> 
+             <button class="accordion">November</button>
+            <div class="panel">
+            <div class="login-page">
+           <div class="form">
+          <form class="login-form" action="#">
+       <p class="headers"> Novemeber 2019 Invoice </p>
+      <?php if ($result11 && $result11->num_rows > 0) { // output data of each row
+      while($row = $result11->fetch_assoc()) { ?>
+      <p class="message" align="left">Security:</p> <p class="message" align="right"> 
+       KES <?php echo $row['security']; ?> </p> <br/> 
+      <p class="message" align="left">Garbage Collection:</p> <p class="message" align="right"> 
+       KES <?php echo $row['garbage']; ?> </p> <br/>
+      <p class="message" align="left">Infrastructure Maintenance:</p> <p class="message" align="right"> 
+       KES <?php echo $row['infrastructure']; ?> </p> <br/>
+      <p class="message" align="left">Total:</p> <p class="message" align="right"> 
+       KES <?php echo $row['total_kes']; ?> (USD <?php echo $row['total_usd']; ?>)</p> <br/>
+</form>
+  <div id="paypal-button11"></div>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script>
+  paypal.Button.render({
+    // Configure environment
+    env: 'sandbox',
+    client: {
+      sandbox: 'AbA_jM24o_SXyUpFUhTHv3q6xgZlzQWLulDi0M659xhaOHr3oGg1YpzG1zoMFbUBZggaFWwylvr5XL0v',
+      production: '',
+    },
+    // Customize button (optional)
+    locale: 'en_US',
+    style: {
+    color: 'blue',   // 'gold, 'blue', 'silver', 'black'
+    size:  'responsive', // 'medium', 'small', 'large', 'responsive'
+    shape: 'rect'    // 'rect', 'pill'
+    },
+    // Set up a payment
+    payment: function(data, actions) {
+      return actions.payment.create({
+        transactions: [{
+          amount: {
+            total: '60',
+            currency: 'USD'
+          }
+        }]
+      });
+    },
+    // Execute the payment
+    onAuthorize: function(data, actions) {
+      return actions.payment.execute().then(function() {
+        // Show a confirmation message to the buyer
+        window.alert('Your payment has been recieved!');
+        location.href = "../php/add_novemeber_payment.php";
+      
+        
+
+      });
+    }
+  }, '#paypal-button11');
+
+</script>
+
+        <?php } }else {
+        echo "No receipt yet.";
+      }
+  
+      ?> 
+             </div>
+          </div>
+             </div> 
+             <button class="accordion">Decemeber</button>
+            <div class="panel">
+            <div class="login-page">
+           <div class="form">
+          <form class="login-form" action="#">
+       <p class="headers"> December 2019 Invoice </p>
+      <?php if ($result12 && $result12->num_rows > 0) { // output data of each row
+      while($row = $result12->fetch_assoc()) { ?>
+      <p class="message" align="left">Security:</p> <p class="message" align="right"> 
+       KES <?php echo $row['security']; ?> </p> <br/> 
+      <p class="message" align="left">Garbage Collection:</p> <p class="message" align="right"> 
+       KES <?php echo $row['garbage']; ?> </p> <br/>
+      <p class="message" align="left">Infrastructure Maintenance:</p> <p class="message" align="right"> 
+       KES <?php echo $row['infrastructure']; ?> </p> <br/>
+      <p class="message" align="left">Total:</p> <p class="message" align="right"> 
+       KES <?php echo $row['total_kes']; ?> (USD <?php echo $row['total_usd']; ?>)</p> <br/>
+</form>
+  <div id="paypal-button12"></div>
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 <script>
   paypal.Button.render({
@@ -637,26 +1015,29 @@ $result7 = $conn->query($sql7);
         // Show a confirmation message to the buyer
         window.alert('Your payment has been recieved!');
         location.href = "../php/add_december_payment.php";
-        
+      
         
 
       });
     }
-  }, '#paypal-button7');
+  }, '#paypal-button12');
 
 </script>
 
         <?php } }else {
         echo "No receipt yet.";
       }
-      error_reporting(0);
-    $conn->close();
+  
       ?> 
              </div>
           </div>
-             </div>   
+             </div> 
 
-      </div>
+-->           
+
+			</div>
+
+
 		
 <script>
 var acc = document.getElementsByClassName("accordion");

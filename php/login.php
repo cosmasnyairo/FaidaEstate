@@ -5,21 +5,18 @@ include('database_connection.php');
 session_start();
 
 $message = '';
-
-
-
 if(isset($_POST["login"]))
 {
- $query = "SELECT * FROM users WHERE username = :username ";
+ $query = "SELECT * FROM users WHERE email = :email ";
  $statement = $connect->prepare($query);
  $statement->execute(
     array(
-      ':username' => $_POST["username"]
+      ':email' => $_POST["email"]
      )
   );
   $count = $statement->rowCount();
   if($count > 0)
- {
+  {
   $result = $statement->fetchAll();
     foreach($result as $row)
     {
@@ -35,7 +32,6 @@ if(isset($_POST["login"]))
         $statement->execute();
         $_SESSION['login_details_id'] = $connect->lastInsertId();
 
-
 $Position = $_SESSION['Position'];
 echo $Position;
 
@@ -45,6 +41,11 @@ switch ($Position)
     header('location:chairdashboard.php');
      die();
     break;
+
+    //case 'Not Verified':
+    //header('location:home.html');
+    //die();
+    //break;
 
     case 'Treasurer':
     header('location:treasurerdashboard.php');
@@ -65,23 +66,19 @@ switch ($Position)
     header('location:dashboard.php');
      die();
     break;
-}
-
 
         // header("location:dashboard.php");
-      }
-      else
-      {
-       $message = "<label>Wrong Password</label>";
-      }
-    }
- }
- else
- {
-  $message = "<label>Wrong Username or Password</label>";
- }
+  }  
 }
-
+elseif ($row ['Position'] == 'Not Verified') {
+  $message = "<label>Your Account has not been verified yet. <br /> Contact the Chairperson for Verification.</label>"; }
+else{
+  $message = "<label>Wrong Password entered. <br /> Please try again. </label>"; }
+}
+}
+else{
+  $message = "<label>Wrong E-mail Address entered. <br /> Please try again.</label>"; }
+}
 ?>
 
 <!-- <html>  
@@ -156,9 +153,9 @@ switch ($Position)
 
           <p class="text-danger"><?php echo $message; ?></p>
 
-          <div class="wrap-input100 validate-input" data-validate="Username is required">
-            <span class="label-input100">Username</span>
-            <input class="input100" type="text" name="username" placeholder="Username">
+          <div class="wrap-input100 validate-input" data-validate="Email Address is required">
+            <span class="label-input100">Email Address</span>
+            <input class="input100" type="text" name="email" placeholder="jane.doe@email.com">
             <span class="focus-input100"></span>
           </div>
 
@@ -186,7 +183,7 @@ switch ($Position)
               <i class="fa fa-long-arrow-right m-l-5"></i>
             </a>
                                     
-                        <a href="../html/home.html" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+            <a href="../html/home.html" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
               Back to Home Page </a>
           </div>
         </form>

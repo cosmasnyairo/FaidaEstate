@@ -8,58 +8,64 @@ $message = '';
 if(isset($_POST["register"]))
 {
  $name = trim($_POST["name"]);
- $housenumber = trim($_POST["housenumber"]);
+ $letter = trim($_POST["letter"]);
+ $number = trim($_POST["number"]);
  $email = trim($_POST["email"]);
- $phoneNo = trim($_POST["phoneNo"]);
+ $phoneno = trim($_POST["phoneNo"]);
+ $position = "Not Verified";
+ $password = trim($_POST["password"]);
+ $plus = "+";
+
+$housenumber = $letter . $number;
+$phoneNo = $plus . $phoneno;
 
  $check_query = "
- SELECT * FROM new_residents 
- WHERE name = :name
+ SELECT * FROM users 
+ WHERE email = :email
  ";
  $statement = $connect->prepare($check_query);
  $check_data = array(
-  ':name'  => $name
+  ':email'  => $email
  );
  if($statement->execute($check_data)) 
  {
   if($statement->rowCount() > 0)
   {
-   $message .= '<p><label>name already taken</label></p>';
+   $message .= '<p><label>Email is already taken</label></p>';
   }
-  else
-  {
-   if(empty($name))
+  elseif(empty($email))
    {
-    $message .= '<p><label>name is required</label></p>';
-   }
-   
+    $message .= '<p><label>Email is required</label></p>';
+  }}
+
    if($message == '')
    {
     $data = array(
      ':name'  => $name,
      ':housenumber'  => $housenumber,
      ':email'  => $email,
-     ':phoneNo'  => $phoneNo
+     ':phoneNo'  => $phoneNo,
+     ':position'  => $position,
+     ':password'  => MD5('".$password."'),
+
     );
 
     $query = "
-    INSERT INTO new_residents 
-    (name, housenumber, email, phoneNo) 
-    VALUES (:name, :housenumber, :email, :phoneNo)
+    INSERT INTO users 
+    (username, houseNumber, email, phoneNo, Position, password) 
+    VALUES (:name, :housenumber, :email, :phoneNo, :position, :password )
     ";
     $statement = $connect->prepare($query);
     if($statement->execute($data))
     {
     echo '<script language="javascript">';
-    echo 'alert("Registration Complete Wait for verification email!");';
+    echo 'alert("Registration Complete! \r\nWait for verification from the Chairperson.");';
     echo "location.href='../html/home.html';";
     echo '</script>';
     }
-   }
   }
- }
 }
-
+   
 ?>
 
 <!-- <html>  
@@ -150,18 +156,18 @@ if(isset($_POST["register"]))
       <div class="login100-more" style="background-image: url(../images/back.jpg);"></div>
 
       <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
-        <form class="login100-form validate-form"  method="post" action="../php/register.php" >
+        <form class="login100-form validate-form" name= "myform" method="post" action="../php/register.php">
           <span class="login100-form-title p-b-59">
             Sign Up
           </span>
                     
                     <div class="wrap-input100 validate-input" data-validate="Name is required">
-            <span class="label-input100">Enter name</span>
+            <span class="label-input100">Full Name</span>
             <input class="input100" type="text" name="name" placeholder="John Doe">
             <span class="focus-input100"></span>
           </div>
                     
-                    <div class="wrap-input100 validate-input" data-validate="email Address is required">
+                    <div class="wrap-input100 validate-input" data-validate="E-mail Address is required">
             <span class="label-input100">Email Address</span>
             <input class="input100" type="text" name="email" placeholder="john.doe@email.com">
             <span class="focus-input100"></span>
@@ -169,16 +175,42 @@ if(isset($_POST["register"]))
                     
                     <div class="wrap-input100 validate-input" data-validate="Phone Number is required">
             <span class="label-input100">Phone Number</span>
-            <input class="input100" type="text" name="phoneNo" placeholder="254712345678">
+            <input class="input100" type="text" name="phoneNo" placeholder="254712345678"> 
             <span class="focus-input100"></span>
           </div>
                     
-                    <div class="wrap-input100 validate-input" data-validate="House Number is required">
-            <span class="label-input100">House Number</span>
-            <input class="input100" type="text" name="housenumber" placeholder="000">
+                  
+            <span class="label-input100">House Number (eg. A1) </span>
+            <div style="float: left;">
+            <select name = "letter" class="input100">
+               <option>--</option>
+               <option value = "A">A</option>
+               <option value = "B">B</option>
+               <option value = "C">C</option>
+               <option value = "D">D</option>
+               <option value = "E">E</option>
+             </select>
+           </div>
+           <div style="float: right;">
+             <select name = "number" class="input100">
+               <option>--</option>
+               <option value = "1">1</option>
+               <option value = "2">2</option>
+               <option value = "3">3</option>
+               <option value = "4">4</option>
+               <option value = "5">5</option>
+               <option value = "6">6</option>
+               <option value = "7">7</option>
+               <option value = "8">8</option>
+             </select>
+           </div>
+           <span class="focus-input100"></span>
+   
+               <div class="wrap-input100 validate-input" data-validate="Password is required">
+            <span class="label-input100">Password</span>
+            <input class="input100" type="password" name="password" placeholder="**********">
             <span class="focus-input100"></span>
           </div>
-
 
             <div class="container-login100-form-btn">
             <div class="wrap-login100-form-btn">
@@ -201,6 +233,7 @@ if(isset($_POST["register"]))
       </div>
     </div>
   </div>
+
   
   <script src="../Login_v13/vendor/jquery/jquery-3.2.1.min.js"></script>
   <script src="../Login_v13/vendor/animsition/js/animsition.min.js"></script>
