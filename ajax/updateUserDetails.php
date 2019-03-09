@@ -14,19 +14,19 @@ if(isset($_POST['user_id']) && isset($_POST['user_id']) != "")
     $phoneNo = $_POST['phoneNo'];
 
     // Updaste User details
-    $query = "UPDATE users SET username = '$username', houseNumber = '$houseNumber',  position = '$position',  email = '$email', phoneNo = '$phoneNo' WHERE user_id = '$user_id'";
+    $query = "UPDATE users SET username = '$username', houseNumber = '$houseNumber',  Position = '$position',  email = '$email', phoneNo = '$phoneNo' WHERE user_id = '$user_id'";
     if (!$result = mysqli_query($con, $query)) {
         exit(mysqli_error($con));
     }
 }
 
-if(isset($_POST['pendingID']) && isset($_POST['pendingID']) != "")
+if(isset($_POST['user_id']) && isset($_POST['user_id']) != "")
 {
-    $pendingID = $_POST['pendingID'];
-    $status = 'Verified';
+    $userID = $_POST['user_id'];
+    $status = 'Resident';
    
     // Update User details
-    $query1 = "UPDATE new_residents SET status = '$status' WHERE pendingID = '$pendingID'";
+    $query1 = "UPDATE users SET username = '$username', houseNumber = '$houseNumber',  Position = '$status',  email = '$email', phoneNo = '$phoneNo' WHERE user_id = '$userID'";
     if (!$result = mysqli_query($con, $query1)) {
         exit(mysqli_error($con));
     }

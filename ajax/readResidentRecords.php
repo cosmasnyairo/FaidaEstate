@@ -16,7 +16,7 @@
 							
 						</tr>';
 
-	$query = "SELECT * FROM users";
+	$query = "SELECT * FROM users WHERE position != 'Not Verified'";
 
 	if (!$result = mysqli_query($con, $query)) {
         exit(mysqli_error($con));
@@ -41,7 +41,7 @@
     else
     {
     	// records now found 
-    	$data .= '<tr><td colspan="6">Records not found!</td></tr>';
+    	$data .= '<tr><td colspan="6">No new records found!</td></tr>';
     }
 
     $data .= '</table>';

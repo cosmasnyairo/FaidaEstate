@@ -6,15 +6,16 @@
 		include("db_connection.php");
 
 		// get values 
-		
+		$plus = '+';
 		$position = $_POST['position'];
 		$houseNumber = $_POST['houseNumber'];
 		$email = $_POST['email'];
 		$phoneNo = $_POST['phoneNo'];
 		$username = $_POST['username'];
-		$password = $_POST['password'];
-		$password= password_hash($password, PASSWORD_DEFAULT);
-		$query = "INSERT INTO users (username, position, houseNumber, email, phoneNo, password) VALUES( '$username' , '$position', '$houseNumber', '$email', '$phoneNo',  '$password')" ; 
+		$password = MD5('".$password."');
+        $phoneno = $plus . $phoneNo;
+
+		$query = "INSERT INTO users (username, position, houseNumber, email, phoneNo, password) VALUES ('$username' , '$position', '$houseNumber', '$email', '$phoneno',  '$password')" ; 
 
 		if (!$result = mysqli_query($con, $query)) {
 	        exit(mysqli_error($con));

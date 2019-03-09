@@ -17,7 +17,7 @@
 							<th>Delete</th>
 						</tr>';
 
-	$query = "SELECT * FROM new_residents" ;
+	$query = "SELECT * FROM users WHERE position = 'Not Verified'";
 
 	if (!$result = mysqli_query($con, $query)) {
         exit(mysqli_error($con));
@@ -31,17 +31,17 @@
     	{
     		$data .= '<tr>
 				<td>'.$number.'</td>
-				<td>'.$row['name'].'</td>
+				<td>'.$row['username'].'</td>
 				<td>'.$row['houseNumber'].'</td>
 				<td>'.$row['email'].'</td>
 				<td>'.$row['phoneNo'].'</td>
-				<td>'.$row['status'].'</td>
+				<td>'.$row['Position'].'</td>
 				
 				<td>
-					<button onclick="UpdateStatus('.$row['pendingID'].')" class="btn btn-success">Verify</button>
+					<button onclick="UpdateStatus('.$row['user_id'].')" class="btn btn-success">Verify</button>
 				</td>
 				<td>
-					<button onclick="DeleteUser('.$row['pendingID'].')" class="btn btn-danger">Delete</button>
+					<button onclick="DeleteUser('.$row['user_id'].')" class="btn btn-danger">Delete</button>
 				</td>
     		</tr>';
     		$number++;
