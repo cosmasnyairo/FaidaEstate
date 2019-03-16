@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	 <title>e-Nyumba | Receipts </title>
+	 <title>e-Nyumba | Prepare Invoices </title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,7 +43,7 @@
 			<nav>
 				<ul>
 					<li>
-						<a href="treasurerdashboard.html">
+						<a href="treasurerdashboard.php">
 							<span><i class="fa fa-user"></i></span>
 							<span>Profile</span>
 						</a>
@@ -58,7 +58,7 @@
           <li>
               <a href="../php/treasurerannouncements.php">
 
-                <span><i class="fa fa-bell"></i></span>
+                <span><i class="fa fa-envelope"></i></span>
                 <span>Announcements</span>
               </a>
             </li>
@@ -66,7 +66,7 @@
 				  <li class="active">
 						<a href="#">
 							<span><i class="fa fa-upload"></i></span>
-							<span>Prepare Receipts</span>
+							<span>Prepare Invoices</span>
 						</a>
 					</li>
         
@@ -89,15 +89,15 @@
         
 		<div class="main-content">
 			<div class="title">
-				Prepare Estate Management Fee Receipts
+				Prepare Estate Management Fee Invoices
 			</div>
             <div class="login-page">
            <div class="form">
     
     <form class="login-form" method="post" action="../php/receipt.php" >
 
-      <p class="message"> Select the Month and Year for Receipt: </p> <br /> 
-      <input type="month" name="month" value="" placeholder="month  year" min="2018-06" max="2018-12" value="2018-01" />
+      <p class="message"> Select the Month and Year for Invoice: </p> <br /> 
+      <input type="month" name="month" value="" placeholder="month  year" min="2010-01" max="2030-12" value="2018-01" />
       
       <p class="message"> Enter the Amount for Security (in KES): </p> <br /> 
       <input type="text" name="security" id="nos" placeholder="0000" value=""/>
