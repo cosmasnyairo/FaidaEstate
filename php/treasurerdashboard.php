@@ -6,11 +6,6 @@ $username = "root";
 $password = "";
 $dbname = "faida_estate";
 
-if( $_SESSION['Position'] != 'Treasurer')
-{
-  header("location:login.php");
-}
-
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -99,6 +94,7 @@ $result = $conn->query($sql);
 				<span>FAIDA ESTATE</span>
 			</div>
 			<a href="#" class="nav-trigger"><span></span></a>
+         <p align="center" style="margin-top: 15px; margin-right: 60px; text-align: right; color: white; font-weight: bold; ">Welcome, <?php echo $_SESSION['username']; ?></p>
 </div>
 		<div class="side-nav">
 			<div class="logo">
@@ -121,7 +117,7 @@ $result = $conn->query($sql);
 					</li>
                     <li>
                         <a href="treasurerannouncements.php">
-                            <span><i class="fa fa-bell"></i></span>
+                            <span><i class="fa fa-envelope"></i></span>
                             <span>Announcements</span>
                         </a>
                     </li>

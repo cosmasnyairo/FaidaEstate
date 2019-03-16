@@ -14,6 +14,7 @@ if(isset($_POST["register"]))
  $phoneno = trim($_POST["phoneNo"]);
  $position = "Not Verified";
  $password = trim($_POST["password"]);
+
  $plus = "+";
 
 $housenumber = $letter . $number;
@@ -46,7 +47,7 @@ $phoneNo = $plus . $phoneno;
      ':email'  => $email,
      ':phoneNo'  => $phoneNo,
      ':position'  => $position,
-     ':password'  => MD5('".$password."'),
+     ':password'  => password_hash('".$password."', PASSWORD_DEFAULT),
 
     );
 

@@ -54,6 +54,7 @@ $conn->close();
         <span>FAIDA ESTATE</span>
       </div>
       <a href="#" class="nav-trigger"><span></span></a>
+      <p align="center" style="margin-top: 15px; margin-right: 60px; text-align: right; color: white; font-weight: bold; "><?php echo $_SESSION['username']; ?></p>
 </div>
     <div class="side-nav">
       <div class="logo">
@@ -76,7 +77,7 @@ $conn->close();
           </li>
           <li>
             <a href="treasurerannouncements.php">
-              <span><i class="fa fa-bell"></i></span>
+              <span><i class="fa fa-envelope"></i></span>
               <span>Announcements</span>
             </a>
           </li>

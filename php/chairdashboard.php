@@ -6,11 +6,6 @@ $username = "root";
 $password = "";
 $dbname = "faida_estate";
 
-if( $_SESSION['Position'] != 'Chairperson')
-{
-    header("location:login.php");
-}
-
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -102,6 +97,9 @@ $result = $conn->query($sql);
 				<i class="fa fa-comments"></i>
 				<span>FAIDA ESTATE</span>
 			</div>
+
+        <a href="#" class="nav-trigger"><span></span></a>
+         <p align="center" style="margin-top: 15px; margin-right: 60px; text-align: right; color: white; font-weight: bold; ">Welcome, <?php echo $_SESSION['username']; ?></p>
 		
 </div>
 		<div class="side-nav">
@@ -119,14 +117,14 @@ $result = $conn->query($sql);
 					</li>
 					<li>
 						<a href="chairchat.php">
-							<span><i class="fa fa-envelope"></i></span>
+							<span><i class="fa fa-comment-alt"></i></span>
 							<span>Chat</span>
 						</a>
 					</li>
                     
                     <li>
                         <a href="chairannouncements.php">
-                            <span><i class="fa fa-bell"></i></span>
+                            <span><i class="fa fa-comment-alt"></i></span>
                             <span>Announcements</span>
                         </a>
                     </li>
@@ -169,16 +167,105 @@ $result = $conn->query($sql);
         <?php echo $data; ?> 
             <div class="records_content"></div>
     </div>
+    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalForm" style="float: left;">
+                     Contact System Administrator
+                     </button>
                 </div>
-				</div>
+                </div>
+
           
-				
-					
-			</div>
+                
+                    
+            </div>
             </div>
         </div>
+        <!-- Modal -->
+<div class="modal fade" id="modalForm" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Contact Form</h4>
+            </div>
             
-<script>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <p class="statusMsg"></p>
+                <form role="form">
+                    <div class="form-group">
+                        <label for="inputName">Name</label>
+                        <input type="text" class="form-control" id="inputName" placeholder="Enter your name"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail">Email</label>
+                        <input type="email" class="form-control" id="inputEmail" placeholder="Enter your email"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputMessage">Message</label>
+                        <textarea class="form-control" id="inputMessage" placeholder="Enter your message"></textarea>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary submitBtn" onclick="submitContactForm()">SUBMIT</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script> 
+    function submitContactForm(){
+    var reg = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+    var name = $('#inputName').val();
+    var email = $('#inputEmail').val();
+    var message = $('#inputMessage').val();
+    if(name.trim() == '' ){
+        alert('Please enter your name.');
+        $('#inputName').focus();
+        return false;
+    }else if(email.trim() == '' ){
+        alert('Please enter your email.');
+        $('#inputEmail').focus();
+        return false;
+    }else if(email.trim() != '' && !reg.test(email)){
+        alert('Please enter valid email.');
+        $('#inputEmail').focus();
+        return false;
+    }else if(message.trim() == '' ){
+        alert('Please enter your message.');
+        $('#inputMessage').focus();
+        return false;
+    }else{
+        $.ajax({
+            type:'POST',
+            url:'../php/submit_form.php',
+            data:'contactFrmSubmit=1&name='+name+'&email='+email+'&message='+message,
+            beforeSend: function () {
+                $('.submitBtn').attr("disabled","disabled");
+                $('.modal-body').css('opacity', '.5');
+            },
+            success:function(msg){
+                if(msg == 'ok'){
+                    $('#inputName').val('');
+                    $('#inputEmail').val('');
+                    $('#inputMessage').val('');
+                    $('.statusMsg').html('<span style="color:green;">Thanks for contacting us, we\'ll get back to you soon.</p>');
+                }else{
+                    $('.statusMsg').html('<span style="color:red;">Some problem occurred, please try again.</span>');
+                }
+                $('.submitBtn').removeAttr("disabled");
+                $('.modal-body').css('opacity', '');
+            }
+        });
+    }
+}
+
 function readRecords() {
     $.get("../php/chairdashboard.php", {}, function (data, position) {
         $(".records_content").html(data);
@@ -192,6 +279,7 @@ logout.addEventListener('click', function() {
     location.href = "../php/chairdashboard.php";
 }
 });
+
 </script>
 </body>
 

@@ -5,12 +5,12 @@ $user = "root";
 $pass = "";
 $database = "faida_estate";
 
-$conn = new mysqli($host,$user,$pass,$database);
- $sql = "SELECT * FROM general_announcement ORDER BY id DESC";
- $result = mysqli_query($conn,$sql);
+$connection_String = mysqli_connect($host,$user,$pass,$database);
+ $get_all_announcement_command = "SELECT * FROM general_announcement ORDER BY id DESC";
+ $execute_get_announcement_query = mysqli_query($connection_String,$get_all_announcement_command);
 
 
- while( $get_rows = mysqli_fetch_assoc($result)){
+ while( $get_rows = mysqli_fetch_assoc($execute_get_announcement_query)){
 
  echo "<div class='col-lg-4 col-md-4 col-sm-6'>";
  echo "<div class='panel panel-decorated'>
@@ -22,7 +22,9 @@ $conn = new mysqli($host,$user,$pass,$database);
          <span>".$get_rows["message_body"]."</span>
          <br><br>
          <br><br>
-         <span> Tom Rotich. <br>Sectretary</span>
+         <span> Sent by: ".$get_rows["sender"]." (Secretary) </span>
+         <br>
+         <span> Sent on: ".$get_rows["date"]."</span>
           </div>
        </div>
        </div>";

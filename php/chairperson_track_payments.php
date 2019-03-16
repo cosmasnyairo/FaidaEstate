@@ -6,11 +6,6 @@ $username = "root";
 $password = "";
 $dbname = "faida_estate";
 
-if( $_SESSION['Position'] != 'Chairperson')
-{
-  header("location:login.php");
-}
-
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -29,7 +24,7 @@ $number = 1;
 <!DOCTYPE html>
 <html>
 <head>
-	<title>e-Nyumba | Payments </title>
+	<title>e-Nyumba | Resident Payments </title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -59,6 +54,7 @@ $number = 1;
                 <span>FAIDA ESTATE</span>
             </div>
             <a href="#" class="nav-trigger"><span></span></a>
+            <p align="center" style="margin-top: 15px; margin-right: 60px; text-align: right; color: white; font-weight: bold; "><?php echo $_SESSION['username']; ?></p>
 </div>
         <div class="side-nav">
             <div class="logo">
@@ -75,14 +71,14 @@ $number = 1;
                     </li>
                     <li>
                         <a href="chairchat.php">
-                            <span><i class="fa fa-envelope"></i></span>
+                            <span><i class="fa fa-comment-alt"></i></span>
                             <span>Chat</span>
                         </a>
                     </li>
                    
                    <li>
                         <a href="chairannouncements.php">
-                            <span><i class="fa fa-bell"></i></span>
+                            <span><i class="fa fa-comment-alt"></i></span>
                             <span>Announcements</span>
                         </a>
                     </li>

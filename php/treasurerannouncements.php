@@ -10,11 +10,6 @@
   {
    header('location:login.php');
   }
-
-if( $_SESSION['Position'] != 'Treasurer')
-{
-  header("location:login.php");
-}
   ?>  
 
 
@@ -48,7 +43,7 @@ if( $_SESSION['Position'] != 'Treasurer')
         </div>
 
         <a href="#" class="nav-trigger"><span></span></a>
-        <p align="center" style="margin-top: 15px; margin-right: 60px; text-align: right; color: black; font-weight: bold; ">Welcome, <?php echo $_SESSION['username']; ?></p>
+        <p align="center" style="margin-top: 15px; margin-right: 60px; text-align: right; color: white; font-weight: bold; "><?php echo $_SESSION['username']; ?></p>
 
     </div>
       <div class="side-nav">
@@ -76,7 +71,7 @@ if( $_SESSION['Position'] != 'Treasurer')
             <li class="active">
               <a href="treasurerannouncements.php">
 
-                <span><i class="fa fa-bell"></i></span>
+                <span><i class="fa fa-envelope"></i></span>
                 <span>Announcements</span>
               </a>
             </li>

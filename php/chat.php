@@ -9,11 +9,6 @@ if(!isset($_SESSION['user_id']))
  header("location:login.php");
 }
 
-if( $_SESSION['Position'] != 'Resident')
-{
-  header("location:login.php");
-}
-
 ?>
 
 <html>
@@ -24,8 +19,6 @@ if( $_SESSION['Position'] != 'Resident')
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link href="https://fonts.googleapis.com/css?family=Abel|Montserrat|Patua+One" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="../css/main_dash.css">
   <link rel="stylesheet" type="text/css" href="../css/index.css">
@@ -62,7 +55,7 @@ if( $_SESSION['Position'] != 'Resident')
       </div>
 
       <a href="#" class="nav-trigger"><span></span></a>
-      <p align="center" style="margin-top: 15px; margin-right: 60px; text-align: right; color: black; font-weight: bold; ">Welcome, <?php echo $_SESSION['username']; ?></p>
+   <p align="center" style="margin-top: 15px; margin-right: 60px; text-align: right; color: white; font-weight: bold; "><?php echo $_SESSION['username']; ?></p>
 
     </div>
     <div class="side-nav">
@@ -90,7 +83,7 @@ if( $_SESSION['Position'] != 'Resident')
           <li>
               <a href="userannouncements.php">
 
-                <span><i class="fa fa-bell"></i></span>
+                <span><i class="fa fa-envelope"></i></span>
                 <span>Announcements</span>
               </a>
             </li>
@@ -98,7 +91,7 @@ if( $_SESSION['Position'] != 'Resident')
   
           <li>
             <a href="finances.php">
-              <span><i class="fa fa-folder"></i></span>
+              <span><i class="fas fa-folder"></i></span>
               <span>Statements</span>
             </a>
           </li>
@@ -178,9 +171,6 @@ if( $_SESSION['Position'] != 'Resident')
     cursor: pointer;
 }
 
-
-
-
 </style>  
 
 <div id="group_chat_dialog" title="Group Chat Window">
@@ -195,12 +185,10 @@ if( $_SESSION['Position'] != 'Resident')
    </div>
    <div class="image_upload">
     <form id="uploadImage" method="post" action="upload.php">
-     <label for="uploadFile"><img src="../images/upload.png" title="Upload Images"/></label>
-     <input type="file" name="uploadFile" id="uploadFile" accept=".jpg, .png, .txt" />
+     <label for="uploadFile"><img src="../images/upload.png"/></label>
+     <input type="file" name="uploadFile" id="uploadFile" accept=".jpg, .png" />
     </form>
    </div>
-   <br>
-
   </div>
  </div>
  <div class="form-group" align="right">

@@ -20,7 +20,8 @@ if(isset($_POST["login"]))
   $result = $statement->fetchAll();
     foreach($result as $row)
     {
-      if(password_verify($_POST["password"], $row["password"]))
+      $hashed_password = $row['password'];
+      if(password_verify($_POST["password"], '".$hashed_password."'))
       {
         $_SESSION['Position'] = $row['Position'];
         $_SESSION['login_id'] = $row[0];
@@ -72,10 +73,12 @@ switch ($Position)
 }
 elseif ($row ['Position'] == 'Not Verified') {
   $message = "<label>Your Account has not been verified yet. <br /> Contact the Chairperson for Verification.</label>"; }
+
 else{
   $message = "<label>Wrong Password entered. <br /> Please try again. </label>"; }
 }
 }
+
 else{
   $message = "<label>Wrong E-mail Address entered. <br /> Please try again.</label>"; }
 }

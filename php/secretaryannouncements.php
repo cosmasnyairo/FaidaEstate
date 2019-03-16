@@ -11,17 +11,25 @@
    header('location:login.php');
   }
 
-if( $_SESSION['Position'] != 'Secretary')
-{
-  header("location:login.php");
-}
+  error_reporting(0);
+
+  $connection_String = mysqli_connect($host,$user,$pass,$database);
+  $message_title = $_POST["title"];
+  $message_body = $_POST["message"];
+  $message_sender = $_SESSION['username'];;
+
+  if($message_title!=""&& $message_body!=""){
+
+   $insert_query_command = "INSERT INTO general_announcement (`id`, `message_title`, `message_body`, `sender`, `date`) VALUES (NULL, '$message_title', '$message_body', '$message_sender', CURRENT_TIMESTAMP)";
+        $execute_insert_query = mysqli_query($connection_String,$insert_query_command);
+      }
   ?>  
 
 
-  <html>
+  <!DOCTYPE html>
   <head>
 
-    <title>e-Nyumba | Announcements </title>
+    <title> e-Nyumba | Announcements </title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,10 +41,33 @@ if( $_SESSION['Position'] != 'Secretary')
     <link rel="stylesheet" type="text/css" href="../css/index.css">  
     <link rel="stylesheet" type="text/css" href="../css/announcements.css"> 
 
-     <script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
-      <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-      <script type="text/javascript" src="../js/bootstrap-select.min.js"></script>
-      <script type="text/javascript" src="../js/jquery.yacal.min.js"></script> 
+      <script type="text/javascript" src="../javascript/jquery-3.1.1.min.js"></script>
+      <script type="text/javascript" src="../javascript/bootstrap.min.js"></script>
+      <script type="text/javascript" src="../javascript/bootstrap-select.min.js"></script>
+      <script type="text/javascript" src="../javascript/jquery.yacal.min.js"></script> 
+
+ <script>
+    $(document).ready(function(){
+
+      setInterval(function(){
+       $(".row-adjusted").load("get_announcements.php").fadeIn("slow");
+       },500);
+
+      $("#btn_post").click(function(){
+         var title_holder = $("#txt_title").val();
+         var message_holder = $("#txt_announcement").val();
+         $.ajax({
+           method:"POST",
+           url:"",
+          data:{"title":title_holder,
+            "message":message_holder},  
+          success:function(status){
+            $(".row-adjusted").load("get_announcements.php").fadeIn("slow");
+              }
+         });
+      });
+    });
+  </script>
 
   </head>
   <body>
@@ -48,7 +79,7 @@ if( $_SESSION['Position'] != 'Secretary')
         </div>
 
         <a href="#" class="nav-trigger"><span></span></a>
-        <p align="center" style="margin-top: 15px; margin-right: 60px; text-align: right; color: black; font-weight: bold; ">Welcome, <?php echo $_SESSION['username']; ?></p>
+        <p align="center" style="margin-top: 15px; margin-right: 60px; text-align: right; color: white; font-weight: bold; "><?php echo $_SESSION['username']; ?></p>
 
     </div>
       <div class="side-nav">
@@ -76,7 +107,7 @@ if( $_SESSION['Position'] != 'Secretary')
             <li class="active">
               <a href="#">
 
-                <span><i class="fa fa-bell"></i></span>
+                <span><i class="fa fa-envelope"></i></span>
                 <span>Announcements</span>
               </a>
             </li>
@@ -96,9 +127,6 @@ if( $_SESSION['Position'] != 'Secretary')
 
         <div class="announcement_page">
           <div class="row row-adjusted">
-            <?php 
-              include('get_announcements.php');
-            ?>
 
           </div>
         </div>
@@ -111,14 +139,14 @@ if( $_SESSION['Position'] != 'Secretary')
         <hr>
       </div>
 
-      <form method="post" action="announce.php">
+      <form method="post" action="">
         <div class="form-group">
              <label for="txt_title" class="msg_title">Message Title</label>
-             <input type="text" class="txt_title form-control form-control-adjusted" name="txt_title" id="txt_title" placeholder="Enter message title">
+             <input type="text" class="txt_title form-control form-control-adjusted" id="txt_title" placeholder="Enter message title">
         </div>
       <div class="form-group">
         <label for="txt_announcement" class="msg_title">Message </label>
-        <textarea  class="form-control" id="txt_announcement" placeholder="Enter announcement here" name="txt_announcement"></textarea>
+        <textarea  class="form-control" id="txt_announcement" placeholder="Enter announcement here"></textarea>
       </div>
       <div class="form-group" id="btn_holder">
       <button class="btn btn-primary" id="btn_post">Post</button>
@@ -130,25 +158,6 @@ if( $_SESSION['Position'] != 'Secretary')
     </div>
       </body>  
   </html>   
-  <script>
-    $(document).ready(function(){
 
-        setInterval(function(){
-       $(".row-adjusted").load("get_announcements.php").fadeIn("slow");
-     },500);
 
-       $("#btn_post").click(function(){
-         var title_holder = $("#txt_title").val();
-         var message_holder = $("#txt_announcement").val();
-         $.ajax({
-           method:"POST",
-           url:"",
-          data:{"title":title_holder,
-            "message":message_holder},  
-          success:function(status){
-            $(".row-adjusted").load("get_announcements.php").fadeIn("slow");
-              }
-         });
-       });
-         });
-  </script>
+   

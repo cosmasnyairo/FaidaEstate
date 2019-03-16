@@ -24,7 +24,7 @@ $result1 = $conn->query($query);
 <!DOCTYPE html>
 <html>
 <head>
-   <title>e-Nyumba | Manage Residents </title>
+   <title>e-Nyumba | Estate Residents </title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -83,6 +83,7 @@ $result1 = $conn->query($query);
                 <span>FAIDA ESTATE</span>
             </div>
             <a href="#" class="nav-trigger"><span></span></a>
+            <p align="center" style="margin-top: 15px; margin-right: 60px; text-align: right; color: white; font-weight: bold; "><?php echo $_SESSION['username']; ?></p>
 </div>
         <div class="side-nav">
             <div class="logo">

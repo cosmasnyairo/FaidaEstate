@@ -6,10 +6,6 @@ $username = "root";
 $password = "";
 $dbname = "faida_estate";
 
-if( $_SESSION['Position'] != 'Administrator')
-{
-	header("location:login.php");
-}
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -68,7 +64,7 @@ $result = $conn->query($sql);
 <!DOCTYPE html>
 <html>
 <head>
-	 <title>e-Nyumba | Admin Dashboard </title>
+	 <title>e-Nyumba | Administrator Dashboard </title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -96,6 +92,7 @@ $result = $conn->query($sql);
 				<span>FAIDA ESTATE</span>
 			</div>
 			<a href="#" class="nav-trigger"><span></span></a>
+         <p align="center" style="margin-top: 15px; margin-right: 60px; text-align: right; color: white; font-weight: bold; ">Welcome, <?php echo $_SESSION['username']; ?></p>
 </div>
 		<div class="side-nav">
 			<div class="logo">
