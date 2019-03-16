@@ -1,4 +1,4 @@
-<script>
+
 function submitDetails(){
     var reg = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
 	var validphone = /^\d{12}$/;
@@ -32,7 +32,7 @@ function submitDetails(){
         $('#inputEmail').focus();
         return false;
     }
-    }else{
+    else{
         $.ajax({
             type:'POST',
             url:'submit_details.php',
@@ -56,4 +56,3 @@ function submitDetails(){
         });
     }
 }
-</script>

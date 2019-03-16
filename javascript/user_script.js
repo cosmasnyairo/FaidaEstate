@@ -34,9 +34,7 @@ function addRecord() {
         $("#email").val("");
         $("#phoneNo").val("");
         $("#password").val("");
-        
     });
-
 }
 
 // READ records
@@ -69,11 +67,11 @@ function GetUserDetail(user_id) {
         },
         function (data, status) {
             // PARSE json data
-            var user = JSON.parse(data);
+            var update =JSON.parse(data);
             // Assing existing values to the modal popup fields
-            $("#house-Number").val(user.houseNumber);
-            $("#e-mail").val(user.email);
-            $("#user-name").val(user.username)
+            $("#contact_houseNumber").val(update.houseNumber);
+            $("#contact_email").val(update.email);
+            $("#contact_username").val(update.username)
             
         }
     );
@@ -89,9 +87,9 @@ function GetUserDetails(user_id) {
         },
         function (data, status) {
             // PARSE json data
-            var update = JSON.parse(data);
+            var update =JSON.parse(data);
             // Assing existing values to the modal popup fields
-            $("#update_position").val(update.position);
+            $("#update_position").val(update.Position);
             $("#update_houseNumber").val(update.houseNumber);
             $("#update_email").val(update.email);
             $("#update_username").val(update.username);

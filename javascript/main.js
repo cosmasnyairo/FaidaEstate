@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
 	$('.nav-trigger').click(function() {
 		$('.side-nav').toggleClass('visible');
@@ -10,7 +11,6 @@ logout.addEventListener('click', function() {
     location.href = "dashboard.php";
 }
 });
-
-  }); 
+}); 
 
   
