@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2019 at 03:51 AM
+-- Generation Time: Mar 16, 2019 at 11:33 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -40,7 +40,8 @@ CREATE TABLE `admin_requests` (
 INSERT INTO `admin_requests` (`requestID`, `name`, `email`, `message`) VALUES
 (1, 'Allan', 'vikiruallan12@gmail.com', 'Hey'),
 (13, 'Tom Rotich', 'trot@j.com', 'Change of emaail'),
-(14, 'SusanOrina', 'sorina@gmail.com', 'Hi there');
+(14, 'SusanOrina', 'sorina@gmail.com', 'Hi there'),
+(15, 'Mary Njenga', 'mnjenga@yahoo.com', 'Change of House Number to A2');
 
 -- --------------------------------------------------------
 
@@ -315,7 +316,31 @@ INSERT INTO `login_details` (`login_details_id`, `user_id`, `last_activity`, `is
 (143, 2, '2019-03-09 00:25:37', 'no'),
 (144, 2, '2019-03-09 00:50:41', 'no'),
 (145, 5, '2019-03-09 01:25:29', 'no'),
-(146, 3, '2019-03-09 02:08:27', 'no');
+(146, 3, '2019-03-09 02:08:27', 'no'),
+(147, 2, '2019-03-09 09:50:03', 'no'),
+(148, 3, '2019-03-09 09:51:59', 'no'),
+(149, 5, '2019-03-09 09:54:33', 'no'),
+(150, 3, '2019-03-11 09:14:43', 'no'),
+(151, 3, '2019-03-11 09:15:14', 'no'),
+(152, 3, '2019-03-11 09:32:59', 'no'),
+(153, 5, '2019-03-11 11:58:16', 'no'),
+(154, 2, '2019-03-11 12:03:54', 'no'),
+(155, 2, '2019-03-11 12:03:55', 'no'),
+(156, 3, '2019-03-11 12:07:36', 'no'),
+(157, 3, '2019-03-11 12:14:48', 'no'),
+(158, 3, '2019-03-12 14:11:08', 'no'),
+(159, 6, '2019-03-12 14:19:07', 'no'),
+(160, 6, '2019-03-12 14:19:44', 'no'),
+(161, 5, '2019-03-12 14:20:35', 'no'),
+(162, 6, '2019-03-12 15:02:00', 'no'),
+(163, 6, '2019-03-12 15:45:23', 'no'),
+(164, 3, '2019-03-14 18:00:27', 'no'),
+(165, 2, '2019-03-14 18:00:45', 'no'),
+(166, 5, '2019-03-14 18:07:58', 'no'),
+(167, 2, '2019-03-15 11:59:23', 'no'),
+(168, 2, '2019-03-15 13:02:08', 'no'),
+(169, 5, '2019-03-15 13:03:24', 'no'),
+(170, 9, '2019-03-15 13:16:44', 'no');
 
 -- --------------------------------------------------------
 
@@ -395,7 +420,8 @@ INSERT INTO `tbl_comment` (`comment_id`, `parent_comment_id`, `comment`, `commen
 (4, 3, 'Its OK', 'Peter', '2018-10-24 21:48:33'),
 (5, 4, 'i am the groot', 'cosmas', '2018-10-24 21:48:43'),
 (6, 0, 'I really love this site', 'Michael', '2018-10-25 05:01:45'),
-(7, 0, 'hi\r\n\r\n\r\n\r\n\r\n\r\n\r\n', 'muj', '2018-10-25 09:06:48');
+(7, 0, 'hi\r\n\r\n\r\n\r\n\r\n\r\n\r\n', 'muj', '2018-10-25 09:06:48'),
+(8, 7, 'Hallo Muj', 'Kelly', '2019-03-12 16:33:23');
 
 -- --------------------------------------------------------
 
@@ -418,18 +444,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `houseNumber`, `email`, `phoneNo`, `Position`, `password`) VALUES
-(1, 'Cosmas Nyairo', 'E2', 'nyairocosmas@gmail.com', '+254799344215', 'Resident', '$2y$10$aqmtYAYwAT7CUSQ43UosjOOeRGkD9AtylAJbchm6vzCF01YKHu2Ku'),
-(2, 'Mary Njenga', '2A', 'mary.njenga@gmail.com', '+254722904502', 'Chairperson', '$2y$10$hG0t0MRpByc7Y8MOAT19d.AleXZJQ/Qty9ZPzdRN5TvZzxLtQufku'),
+(1, 'Cosmas Nyairo', 'E5', 'nyairocosmas@gmail.com', '+254799344215', 'Resident', '$2y$10$aqmtYAYwAT7CUSQ43UosjOOeRGkD9AtylAJbchm6vzCF01YKHu2Ku'),
+(2, 'Mary Njenga', 'A2', 'mary.njenga@gmail.com', '+254722904502', 'Chairperson', '$2y$10$hG0t0MRpByc7Y8MOAT19d.AleXZJQ/Qty9ZPzdRN5TvZzxLtQufku'),
 (3, 'Allan Vikiru', 'C3', 'vikiruallan12@gmail.com', '+254735696067', 'Resident', '$2y$10$jd6f9NIpbXGL9Jq6pNtmCe3nbxMAVXlofWnuPvt69.dbm3wnRxCKq'),
-(4, 'Susan Orina', 'B2', 'susan.orina@gmail.com', '+254722904502', 'Resident', '$2y$10$of2rS7Ga09PEuAW6cHZmqe8UzwU/FQ2QUWOXWpmhy9OtUCZHsL5sC'),
+(4, 'Susan Orina', 'B2', 'susan.orina@gmail.com', '+254722904502', 'Treasurer', '$2y$10$of2rS7Ga09PEuAW6cHZmqe8UzwU/FQ2QUWOXWpmhy9OtUCZHsL5sC'),
 (5, 'Moses Mumo', '-', 'mmumo@gmail.com', '+254735098651', 'Administrator', '$2y$10$irxmB9jrnmh30ElEhZDsduUFCbhwVWGM4SKCNTD2IUTvYrpNpR//S'),
-(6, 'Tom Rotich', 'A5', 'trotich@gmail.com', '+254735696067', 'Resident', '$2y$10$emgyQrZuLkUaoGzKVNxdY.XLi.aQos691Q2yAEqlAiJV1uoUBbW56'),
+(6, 'Tom Rotich', 'A5', 'trotich@gmail.com', '+254735696067', 'Secretary', '$2y$10$emgyQrZuLkUaoGzKVNxdY.XLi.aQos691Q2yAEqlAiJV1uoUBbW56'),
 (7, 'Sarah Mukhonza', 'A6', 'smukhonza@gmail.com', '+254735124684', 'Resident', '$2y$10$KbSItiFEsYFR.chQbRsZuu.6Dh5OschMLrqFRf9pntI8iTRCNPnyy'),
 (8, 'Peter Maina', 'B7', 'pmaina@gmail.com', '+254723589134', 'Resident', '$2y$10$vCQuzcDMs0U5xfhgYhBCiu5/2.fyK90spWjBRRs2r3aVh6HD5OJAq'),
 (9, 'Josephine', 'A1', 'josephinem@gmail.com', '+254727848914', 'Resident', '$2y$10$hnjHDgZmqt0Qc6JIFDKiye0rY8XDbljlPz9wdFeOY77teqkJHm996'),
-(19, 'Regina', 'B2', 'regina@gmail.com', '+254723465139', 'Resident', '5785dbb00c497a3a319917382647d8b4'),
-(20, 'Laura Neri', 'B2', 'lneri@gmail.com', '+254725467920', 'Resident', '5785dbb00c497a3a319917382647d8b4'),
-(22, 'Kim Manha', 'B7', 'jmanha@gmail.com', '+254732903873', 'Resident', '5785dbb00c497a3a319917382647d8b4');
+(24, 'Eric Kimani', 'D6', 'erickimani@gmail.com', '+254735908432', 'Resident', '$2y$10$qOIOEL64Wqp6PGLnyozJ1eLyAJtDb3tIj.rOoKk.523/Ekw.1TiK2'),
+(25, 'Abdi Hassan', 'E2', 'ahassan@gmail.com', '+254731201493', 'Resident', '$2y$10$t5sJ.Ho.UUD1po3YeatW8ezg7PYxTjwnv7RtmMWEQlMaWbPn2JX5W');
 
 --
 -- Indexes for dumped tables
@@ -491,7 +516,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin_requests`
 --
 ALTER TABLE `admin_requests`
-  MODIFY `requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `requestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `chat_message`
 --
@@ -501,7 +526,7 @@ ALTER TABLE `chat_message`
 -- AUTO_INCREMENT for table `login_details`
 --
 ALTER TABLE `login_details`
-  MODIFY `login_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
+  MODIFY `login_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
 --
 -- AUTO_INCREMENT for table `payments`
 --
@@ -516,7 +541,7 @@ ALTER TABLE `statement`
 -- AUTO_INCREMENT for table `tbl_comment`
 --
 ALTER TABLE `tbl_comment`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `users`
 --
