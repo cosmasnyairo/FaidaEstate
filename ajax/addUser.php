@@ -12,7 +12,8 @@
 		$email = $_POST['email'];
 		$phoneNo = $_POST['phoneNo'];
 		$username = $_POST['username'];
-		$password = MD5('".$password."');
+		$password = password_hash('password', PASSWORD_DEFAULT),
+
         $phoneno = $plus . $phoneNo;
 
 		$query = "INSERT INTO users (username, position, houseNumber, email, phoneNo, password) VALUES ('$username' , '$position', '$houseNumber', '$email', '$phoneno',  '$password')" ; 

@@ -19,4 +19,5 @@ if(isset($_POST['user_id']) && isset($_POST['user_id']) != "")
         exit(mysqli_error($con));
     }
 }
+
 ?>
