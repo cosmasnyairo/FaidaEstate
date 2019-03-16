@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>e-Nyumba Estate App | Home</title>
+	<link href="https://fonts.googleapis.com/css?family=Abel|Montserrat|Patua+One" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../css/istyle.css">
+    <link rel="icon" type="image/png" href="../Login_v13/images/icons/favicon.ico"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" type="text/css" href="../Login_v13/css/main.css">
+</head>
+<body>
+<div class="bg-image">
+
+	<div class="bw-gradient"></div>
+	<div class="container">
+		<div class="logo">e-Nyumba Estate Management</div>
+		<div class="header">
+			<nav>
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="../php/comment.php">Leave Feedback</a></li>
+				<li><a href="../php/login.php">Login</a></li>
+			</ul>	
+			</nav>
+            <a href="../php/register.php"> <button class="btn">Register</button> </a>
+		</div>	
+		<h1 class="brand-quote">e-Nyumba</h1>
+		<h2 class="brand-quote" style="color:#34f315">The Future of Estate Management</h2>
+		<p class="parag">Pay your Fees.</p> 
+        <p class="parag">Hold Meetings.</p>
+        <p class="parag">Anywhere, Anytime! Register Today.</p>
+        <footer style="margin-left: 1000px; margin-top: 29%; "><button class="btn" onclick="scrollDown()" > Queries?   Contact Us </button> </div>
+           </div>
+
+    
+
+	
+
+		  <div class="container" style="margin-bottom: -100px;">
+		   <div class="row">
+		    <div class="col-md-8" style="margin:0 auto; float:none;">
+		     <h3 align="center" class="brand-quote" style="color:#3ad315">Contact Us</h3>
+		     <br />	
+		     <br />
+		     <br />
+		     <br />
+		     <br />
+		     <br />	
+		     
+		     <form method="post" action="../contactus/contactus.php">
+		      <div class="form-group">
+		       <label class="label-input100" style="color: black;">Name</label>
+		       <input type="text" name="name" placeholder="Enter Name" class="form-control" value="" />
+		      </div>
+		      <div class="form-group">
+		       <label class="label-input100" style="color: black;">Email Address</label>
+		       <input type="text" name="email" class="form-control" placeholder="Enter Email" value="" />
+		      </div>
+		      <div class="form-group">
+		       <label class="label-input100" style="color: black;" >Subject</label>
+		       <input type="text" name="subject" class="form-control" placeholder="Enter Subject" value="" />
+		      </div>
+		      <div class="form-group">
+		       <label class="label-input100" style="color: black;">Message</label>
+		       <textarea name="message" class="form-control" placeholder="Enter Message"></textarea>
+		      </div>
+				<br />
+		      <div class="form-group" align="left" >
+		       <input type="submit" name="submit" value="Submit" class="btn btn-info" />
+		      </div>
+		     </form>
+		
+		   </div>
+    	<footer style="margin-left: 500px; margin-top: 100px; "><button class="btn" onclick="scrollUp()">Back to Home Page </button>
+    	</footer></div>
+
+</body>
+	
+</html>
+<script>
+function scrollDown() {
+    window.scrollBy(0, 1000);
+}
+function scrollUp() {
+    window.scrollBy(0, -1000);
+}
+</script>
